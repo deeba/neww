@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Accpt RejWO View Controller-->
+        <scene sceneID="7pX-ZA-p0I">
+            <objects>
+                <viewController storyboardIdentifier="AccptRejWOStory" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="FYp-mW-uKL" customClass="AccptRejWOViewController" customModule="AMTfm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jHm-dE-r9n">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNk-UZ-Vo3">
+                                <rect key="frame" x="54.5" y="355" width="305" height="186"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNq-Jf-CDd">
+                                        <rect key="frame" x="0.0" y="8" width="305" height="165"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOj-wE-Ebf">
+                                                <rect key="frame" x="164.5" y="114" width="127" height="51"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnS:" destination="FYp-mW-uKL" eventType="touchUpInside" id="GCv-F0-EB1"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-SC-U7P">
+                                                <rect key="frame" x="15.5" y="114" width="127" height="51"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnNo:" destination="FYp-mW-uKL" eventType="touchUpInside" id="Jlz-AH-NAo"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Group-16" translatesAutoresizingMaskIntoConstraints="NO" id="zzE-98-pnL">
+                                        <rect key="frame" x="-23" y="-11" width="350" height="207"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zn-Hm-VcF">
+                                        <rect key="frame" x="8" y="8" width="289" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="7zn-Hm-VcF" firstAttribute="leading" secondItem="hNk-UZ-Vo3" secondAttribute="leadingMargin" id="84q-4H-bsV"/>
+                                    <constraint firstAttribute="height" constant="186" id="Llg-W2-j66"/>
+                                    <constraint firstItem="7zn-Hm-VcF" firstAttribute="top" secondItem="hNk-UZ-Vo3" secondAttribute="topMargin" id="ZTo-vW-pse"/>
+                                    <constraint firstAttribute="width" constant="305" id="e6J-gY-Lbd"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="7zn-Hm-VcF" secondAttribute="trailing" id="trp-Hi-SDJ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you wish to accept the work order?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-BU-rDL">
+                                <rect key="frame" x="5" y="429" width="404" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.61176049710000002" green="0.61181056499999997" blue="0.60785013440000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="hNk-UZ-Vo3" firstAttribute="centerY" secondItem="jHm-dE-r9n" secondAttribute="centerY" id="7wB-dW-FAz"/>
+                            <constraint firstItem="ULn-BU-rDL" firstAttribute="top" secondItem="7zn-Hm-VcF" secondAttribute="bottom" constant="45" id="BJH-Fd-60g"/>
+                            <constraint firstItem="ULn-BU-rDL" firstAttribute="leading" secondItem="vNx-sI-JDm" secondAttribute="leading" constant="5" id="ajx-Kg-8fg"/>
+                            <constraint firstItem="vNx-sI-JDm" firstAttribute="trailing" secondItem="ULn-BU-rDL" secondAttribute="trailing" constant="5" id="nSY-GT-UKq"/>
+                            <constraint firstItem="hNk-UZ-Vo3" firstAttribute="centerX" secondItem="jHm-dE-r9n" secondAttribute="centerX" id="u7B-hS-Dno"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vNx-sI-JDm"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntl-b9-JoB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="63.768115942028992" y="85.714285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group-16" width="313" height="194"/>
+    </resources>
+</document>

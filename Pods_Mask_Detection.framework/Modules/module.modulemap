@@ -1,0 +1,6 @@
+framework module Pods_Mask_Detection {
+  umbrella header "Pods-Mask Detection-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_HSpace {
+  umbrella header "Pods-HSpace-umbrella.h"
+
+  export *
+  module * { export * }
+}

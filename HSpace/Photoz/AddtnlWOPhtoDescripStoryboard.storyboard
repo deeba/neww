@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--AddtnlWO Phto Descrip View Controller-->
+        <scene sceneID="P7w-n7-qk2">
+            <objects>
+                <viewController storyboardIdentifier="PhtoDescripStory" id="B4b-I0-Yxl" customClass="AddtnlWOPhtoDescripViewController" customModule="HSpace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="b4y-2a-aHd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group-29" translatesAutoresizingMaskIntoConstraints="NO" id="4DT-bq-JX2">
+                                <rect key="frame" x="35" y="304" width="317" height="198"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQE-0m-dxt">
+                                <rect key="frame" x="63" y="351" width="264" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="264" id="oEk-g5-Owh"/>
+                                    <constraint firstAttribute="height" constant="34" id="xG5-GW-MV5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzb-dh-DrJ">
+                                <rect key="frame" x="120" y="524" width="141" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="141" id="18t-R3-4Ic"/>
+                                    <constraint firstAttribute="height" constant="50" id="61C-1a-knB"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnOk:" destination="B4b-I0-Yxl" eventType="touchUpInside" id="Uwd-Kp-L78"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="RQE-0m-dxt" firstAttribute="leading" secondItem="Npe-8A-xdO" secondAttribute="leading" constant="63" id="0dQ-YV-P3Y"/>
+                            <constraint firstItem="4DT-bq-JX2" firstAttribute="top" secondItem="Npe-8A-xdO" secondAttribute="top" constant="260" id="2FI-fF-dVK"/>
+                            <constraint firstItem="4DT-bq-JX2" firstAttribute="leading" secondItem="Npe-8A-xdO" secondAttribute="leading" constant="35" id="3oG-i2-w8N"/>
+                            <constraint firstItem="kzb-dh-DrJ" firstAttribute="leading" secondItem="Npe-8A-xdO" secondAttribute="leading" constant="120" id="99O-Zm-8j9"/>
+                            <constraint firstItem="RQE-0m-dxt" firstAttribute="top" secondItem="Npe-8A-xdO" secondAttribute="top" constant="307" id="YNY-Ks-kbV"/>
+                            <constraint firstItem="Npe-8A-xdO" firstAttribute="bottom" secondItem="kzb-dh-DrJ" secondAttribute="bottom" constant="288" id="bEg-PQ-Zbe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Npe-8A-xdO"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnOk" destination="kzb-dh-DrJ" id="6OF-cf-fEt"/>
+                        <outlet property="txtDescrip" destination="RQE-0m-dxt" id="D81-L8-OsW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hil-vc-r7p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-391.304347826087" y="39.508928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group-29" width="317" height="198"/>
+    </resources>
+</document>

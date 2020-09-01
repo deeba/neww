@@ -1,0 +1,406 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red93\green108\blue121;\red255\green255\blue255;\red0\green0\blue0;
+\red155\green35\blue147;\red28\green70\blue74;\red57\green0\blue160;\red15\green104\blue160;\red50\green109\blue116;
+\red108\green54\blue169;\red28\green0\blue207;\red196\green26\blue22;\red11\green79\blue121;}
+{\*\expandedcolortbl;;\csgenericrgb\c36526\c42188\c47515;\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c0\c0\c0\c85000;
+\csgenericrgb\c60759\c13753\c57628;\csgenericrgb\c10981\c27276\c28869;\csgenericrgb\c22454\c0\c62803;\csgenericrgb\c5882\c40784\c62745;\csgenericrgb\c19418\c42935\c45455;
+\csgenericrgb\c42190\c21278\c66379;\csgenericrgb\c11000\c0\c81000;\csgenericrgb\c77000\c10200\c8600;\csgenericrgb\c4314\c30980\c47451;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab593
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 //\cf4 \
+\cf2 //  NwViewController.swift\cf4 \
+\cf2 //  AMTfm\cf4 \
+\cf2 //\cf4 \
+\cf2 //  Created by DEEBA on 03.04.20.\cf4 \
+\cf2 //  Copyright \'a9 2020 Dabus.tv. All rights reserved.\cf4 \
+\cf2 //\cf4 \
+\
+\pard\tx593\pardeftab593\pardirnatural\partightenfactor0
+
+\f1\b \cf5 import
+\f0\b0 \cf4  UIKit\
+
+\f1\b \cf5 import
+\f0\b0 \cf4  SwiftyJSON\
+
+\f1\b \cf5 extension
+\f0\b0 \cf4  \cf6 NwViewController\cf4 : \cf7 UICollectionViewDataSource\cf4 ,\cf7 UICollectionViewDelegate\cf4 \
+\{\
+    
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , numberOfItemsInSection section: \cf7 Int\cf4 ) -> \cf7 Int\cf4  \{\
+        
+\f1\b \cf5 return
+\f0\b0 \cf4     \cf9 DisNm\cf4 .\cf10 count\cf4 \
+    \}\
+    \
+      
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , layout collectionViewLayout: \cf7 UICollectionViewLayout\cf4 , insetForSectionAt section: \cf7 Int\cf4 ) -> \cf7 UIEdgeInsets\cf4  \{\
+            
+\f1\b \cf5 return
+\f0\b0 \cf4  \cf7 UIEdgeInsets\cf4 (top: \cf11 0\cf4 , left: \cf11 0\cf4 , bottom: \cf11 0\cf4 , right: \cf11 0\cf4 )\
+        \}\
+        
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , layout collectionViewLayout: \cf7 UICollectionViewLayout\cf4 , sizeForItemAt indexPath: \cf7 IndexPath\cf4 ) -> \cf7 CGSize\cf4  \{\
+            
+\f1\b \cf5 let
+\f0\b0 \cf4  bounds  = collectionView.\cf10 bounds\cf4 \
+            
+\f1\b \cf5 return
+\f0\b0 \cf4  \cf7 CGSize\cf4 (width: bounds.\cf10 width\cf4  , height: \cf11 170\cf4 )\
+        \}\
+        
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , layout collectionViewLayout: \cf7 UICollectionViewLayout\cf4 , minimumInteritemSpacingForSectionAt section: \cf7 Int\cf4 ) -> \cf7 CGFloat\cf4  \{\
+            
+\f1\b \cf5 return
+\f0\b0 \cf4  \cf11 0\cf4 \
+        \}\
+        
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , didSelectItemAt indexPath: \cf7 IndexPath\cf4 ) \{\
+           \cf2 // print(TmNm[indexPath.row])\cf4 \
+        \}\
+        
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , layout collectionViewLayout: \cf7 UICollectionViewLayout\cf4 , minimumLineSpacingForSectionAt section: \cf7 Int\cf4 ) -> \cf7 CGFloat\cf4  \{\
+            
+\f1\b \cf5 return
+\f0\b0 \cf4  \cf11 0\cf4 \
+        \}\
+    
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 timeString\cf4 (time: \cf7 TimeInterval\cf4 ) -> \cf7 String\cf4  \{\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  hour = \cf7 Int\cf4 (time) \cf10 /\cf4  \cf11 3600\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  minute = \cf7 Int\cf4 (time) \cf10 /\cf4  \cf11 60\cf4  \cf10 %\cf4  \cf11 60\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  second = \cf7 Int\cf4 (time) \cf10 %\cf4  \cf11 60\cf4 \
+\
+        \cf2 // return formated string\cf4 \
+        
+\f1\b \cf5 return
+\f0\b0 \cf4  \cf7 String\cf4 (format: \cf12 "%02ih %02im "\cf4 , hour, minute)\
+    \}\
+    
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 convertToUTC\cf4 (dateToConvert:\cf7 String\cf4 ) -> \cf7 String\cf4  \{\
+               
+\f1\b \cf5 let
+\f0\b0 \cf4  formatter = \cf7 DateFormatter\cf4 ()\
+               formatter.\cf10 dateFormat\cf4  = \cf12 "yyyy-MM-dd HH:mm:ss"\cf4 \
+               
+\f1\b \cf5 let
+\f0\b0 \cf4  convertedDate = formatter.\cf10 date\cf4 (from: dateToConvert)\
+               formatter.\cf10 timeZone\cf4  = \cf7 TimeZone\cf4 (identifier: \cf12 "UTC"\cf4 )\
+               
+\f1\b \cf5 return
+\f0\b0 \cf4  formatter.\cf10 string\cf4 (from: convertedDate!)\
+                  \
+              \}\
+    
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 collectionView\cf4 (
+\f1\b \cf5 _
+\f0\b0 \cf4  collectionView: \cf7 UICollectionView\cf4 , cellForItemAt indexPath: \cf7 IndexPath\cf4 ) -> \cf7 UICollectionViewCell\cf4  \{\
+                                                                                                                                          
+\f1\b \cf5 let
+\f0\b0 \cf4  cell = collectionView.\cf10 dequeueReusableCell\cf4 (withReuseIdentifier: \cf12 "cellNw"\cf4 , for: indexPath) 
+\f1\b \cf5 as
+\f0\b0 \cf4 ! \cf6 NwCollectionViewCell\cf4 \
+        cell.\cf9 DisNam\cf4 .\cf10 text\cf4  = \cf9 DisNm\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4 \
+        cell.\cf9 TmNam\cf4 .\cf10 text\cf4  = \cf9 TmNam\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4 \
+        cell.\cf9 eqpNam\cf4 .\cf10 text\cf4  = \cf9 EqNam\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4 \
+        cell.\cf9 Caus\cf4 .\cf10 text\cf4  = \cf9 Caus\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4 \
+         
+\f1\b \cf5 let
+\f0\b0 \cf4  message: \cf7 String\cf4  = \cf9 EqLcn\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4  ?? \cf12 ""\cf4 \
+        \cf2 //set the text and style if any.\cf4 \
+         cell.\cf9 eqpLcn\cf4 .\cf10 text\cf4  = message\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  prioriti: \cf7 String\cf4  = \cf9 Prioritz\cf4 [indexPath.\cf10 row\cf4 ] 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? \cf7 String\cf4  ?? \cf12 ""\cf4 \
+        
+\f1\b \cf5 if
+\f0\b0 \cf4 (prioriti \cf10 ==\cf4  \cf12 "0"\cf4 )\{\
+            cell.\cf9 ImgStts\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Rectangle 15-2"\cf4 )\
+            cell.\cf9 lblstatus\cf4 .\cf10 text\cf4  = \cf12 "Low"\cf4 \
+            \}\
+        
+\f1\b \cf5 if
+\f0\b0 \cf4 (prioriti \cf10 ==\cf4  \cf12 "1"\cf4 )\{\
+            cell.\cf9 ImgStts\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Rectangle 15-3"\cf4 )\
+            cell.\cf9 lblstatus\cf4 .\cf10 text\cf4  = \cf12 "Normal"\cf4 \
+        \}\
+        
+\f1\b \cf5 if
+\f0\b0 \cf4 (prioriti \cf10 ==\cf4  \cf12 "2"\cf4 )\{\
+            cell.\cf9 ImgStts\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Rectangle 15-1"\cf4 )\
+            cell.\cf9 lblstatus\cf4 .\cf10 text\cf4 ? = \cf12 "High"\cf4 \
+        \}\
+        
+\f1\b \cf5 if
+\f0\b0 \cf4 (prioriti \cf10 ==\cf4  \cf12 "3"\cf4 )\{\
+            cell.\cf9 ImgStts\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Rectangle 15-4"\cf4 )\
+            cell.\cf9 lblstatus\cf4 .\cf10 text\cf4 ? = \cf12 "Breakdown"\cf4 \
+        \}\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  chkdTim  = \cf9 dtSchedule\cf4 [indexPath.\cf10 row\cf4 ]\
+       
+\f1\b \cf5 let
+\f0\b0 \cf4  dateFormatter = \cf7 DateFormatter\cf4 ()\
+        \cf10 print\cf4 (\cf12 "DTAPI--"\cf4 ,chkdTim)\
+        dateFormatter.\cf10 dateFormat\cf4  = \cf12 "yyyy-MM-dd HH:mm:ss"\cf4 \
+\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  date = \cf7 Date\cf4 ()\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  dateString = dateFormatter.\cf10 string\cf4 (from: date)\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  lstDatetime = \cf9 convertToUTC\cf4 (dateToConvert: dateString)\
+        \cf10 print\cf4 (lstDatetime)\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  dateString1 = chkdTim\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  dateString2 = lstDatetime\
+\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  Dateformatter = \cf7 DateFormatter\cf4 ()\
+        Dateformatter.\cf10 dateFormat\cf4  = \cf12 "yyyy-MM-dd HH:mm:ss"\cf4 \
+\
+\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  date1 = Dateformatter.\cf10 date\cf4 (from: dateString1 
+\f1\b \cf5 as
+\f0\b0 \cf4 ! \cf7 String\cf4 )\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  date2 = Dateformatter.\cf10 date\cf4 (from: dateString2  
+\f1\b \cf5 as
+\f0\b0 \cf4 ! \cf7 String\cf4 )\
+\
+\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  distanceBetweenDates: \cf7 TimeInterval\cf4 ? = date1?.\cf10 timeIntervalSince\cf4 (date2!)\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secondsInAnHour: \cf7 Double\cf4  = \cf11 3600\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  minsInAnHour: \cf7 Double\cf4  = \cf11 60\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secondsInDays: \cf7 Double\cf4  = \cf11 86400\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secondsInWeek: \cf7 Double\cf4  = \cf11 604800\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secondsInMonths : \cf7 Double\cf4  = \cf11 2592000\cf4 \
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secondsInYears : \cf7 Double\cf4  = \cf11 31104000\cf4 \
+\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  minBetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  minsInAnHour))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  hoursBetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  secondsInAnHour))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  daysBetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  secondsInDays))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  weekBetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  secondsInWeek))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  monthsbetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  secondsInMonths))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  yearbetweenDates = \cf7 Int\cf4 ((distanceBetweenDates! \cf10 /\cf4  secondsInYears))\
+        
+\f1\b \cf5 let
+\f0\b0 \cf4  secbetweenDates = \cf7 Int\cf4 (distanceBetweenDates!)\
+       \
+       
+\f1\b \cf5 if
+\f0\b0 \cf4 (\cf7 Int\cf4 (distanceBetweenDates!)\
+        \cf10 >\cf4  \cf11 0\cf4 )\{\
+           cell.\cf9 ImgTim\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Group-13"\cf4 )\
+       \}\
+       
+\f1\b \cf5 else
+\f0\b0 \cf4 \
+       \{\
+           cell.\cf9 ImgTim\cf4 .\cf10 image\cf4  = \cf7 UIImage\cf4 (named: \cf12 "Group-14"\cf4 )\
+       \}\
+  cell.\cf9 lblTim\cf4 ?.\cf10 text\cf4  = \cf9 timeString\cf4 (time: \cf7 TimeInterval\cf4 (\cf10 abs\cf4 (secbetweenDates)))\
+         cell.\cf10 contentView\cf4 .\cf10 layer\cf4 .\cf10 cornerRadius\cf4  = \cf11 4.0\cf4 \
+         cell.\cf10 contentView\cf4 .\cf10 layer\cf4 .\cf10 borderWidth\cf4  = \cf11 1.0\cf4 \
+         cell.\cf10 contentView\cf4 .\cf10 layer\cf4 .\cf10 borderColor\cf4  = \cf7 UIColor\cf4 .\cf10 clear\cf4 .\cf10 cgColor\cf4 \
+         cell.\cf10 contentView\cf4 .\cf10 layer\cf4 .\cf10 masksToBounds\cf4  = 
+\f1\b \cf5 false
+\f0\b0 \cf4 \
+         cell.\cf10 layer\cf4 .\cf10 shadowOffset\cf4  = \cf7 CGSize\cf4 (width: \cf11 0\cf4 , height: \cf11 1.0\cf4 )\
+        cell.\cf10 layer\cf4 .\cf10 shadowRadius\cf4  = \cf11 0.12\cf4 \
+         cell.\cf10 layer\cf4 .\cf10 shadowOpacity\cf4  = \cf11 0.12\cf4 \
+         cell.\cf10 layer\cf4 .\cf10 masksToBounds\cf4  = 
+\f1\b \cf5 false
+\f0\b0 \cf4 \
+         cell.\cf10 layer\cf4 .\cf10 shadowPath\cf4  = \cf7 UIBezierPath\cf4 (roundedRect: cell.\cf10 bounds\cf4 , cornerRadius: cell.\cf10 contentView\cf4 .\cf10 layer\cf4 .\cf10 cornerRadius\cf4 ).\cf10 cgPath\cf4 \
+        
+\f1\b \cf5 return
+\f0\b0 \cf4  cell\
+    \}\
+    \
+    \
+\}\
+
+\f1\b \cf5 class
+\f0\b0 \cf4  \cf13 NwViewController\cf4 : \cf7 UIViewController\cf4  \{\
+    
+\f1\b \cf5 @IBOutlet
+\f0\b0 \cf4  
+\f1\b \cf5 weak
+\f0\b0 \cf4  
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 collectionView\cf4 : \cf7 UICollectionView\cf4 !\
+     
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 instanceOfWOrder\cf4  = \cf6 WOglobal\cf4 ()\
+    
+\f1\b \cf5 let
+\f0\b0 \cf4  \cf8 instanceOfUser\cf4  = \cf6 readWrite\cf4 ()\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 DisNm\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 TmNam\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 EqNam\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 Caus\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 EqLcn\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 Prioritz\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 var
+\f0\b0 \cf4  \cf8 dtSchedule\cf4 : \cf7 NSMutableArray\cf4  = []\
+    
+\f1\b \cf5 override
+\f0\b0 \cf4  
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 viewDidLoad\cf4 () \{\
+        
+\f1\b \cf5 super
+\f0\b0 \cf4 .\cf10 viewDidLoad\cf4 ()\
+        
+\f1\b \cf5 self
+\f0\b0 \cf4 .\cf10 perform\cf4 (
+\f1\b \cf5 #selector
+\f0\b0 \cf4 (\cf9 changecolor\cf4 ),with:
+\f1\b \cf5 nil
+\f0\b0 \cf4 ,afterDelay: \cf11 0.5\cf4 )\
+\
+       \
+        
+\f1\b \cf5 if
+\f0\b0 \cf4  
+\f1\b \cf5 let
+\f0\b0 \cf4  strings =\
+       
+\f1\b \cf5 self
+\f0\b0 \cf4 .\cf9 instanceOfWOrder\cf4 .\cf9 userDefaults\cf4 .\cf10 object\cf4 (forKey: \cf12 "NewWrkz"\cf4 ) 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? [
+\f1\b \cf5 Any
+\f0\b0 \cf4 ]\{\
+       \
+       
+\f1\b \cf5 let
+\f0\b0 \cf4  adressDictz = strings.\cf10 compactMap\cf4 \{ $0 
+\f1\b \cf5 as
+\f0\b0 \cf4 ? [\cf7 String\cf4 : 
+\f1\b \cf5 Any
+\f0\b0 \cf4 ] \}\
+\
+       
+\f1\b \cf5 var
+\f0\b0 \cf4  tmNmz = 
+\f1\b \cf5 self
+\f0\b0 \cf4 .\cf9 instanceOfUser\cf4 .\cf9 readStringData\cf4 (key: \cf12 "TmNm"\cf4  )\
+       
+\f1\b \cf5 for
+\f0\b0 \cf4  j 
+\f1\b \cf5 in
+\f0\b0 \cf4  \cf11 0\cf10 ..<\cf4 adressDictz.\cf10 count\cf4  \{\
+           \cf9 DisNm\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "display_name"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+           \cf9 TmNam\cf4 .\cf10 add\cf4 (tmNmz)\
+           \cf9 EqNam\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "equipment_nam"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+           \cf9 Caus\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "cause"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+           \cf9 EqLcn\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "equipment_location_nam"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+           \cf9 Prioritz\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "prioritz"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+           \cf9 dtSchedule\cf4 .\cf10 add\cf4 (adressDictz[j][\cf12 "DtSchedule"\cf4 ] ?? \cf12 "gfhf"\cf4 )\
+        \}\
+       \}\
+        \cf2 // Do any additional setup after loading the view.\cf4 \
+    \}\
+
+\f1\b \cf5 @objc
+\f0\b0 \cf4  
+\f1\b \cf5 func
+\f0\b0 \cf4  \cf8 changecolor\cf4 ()\{\
+    \}\
+\}\
+\
+\
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="G6W-Ii-wa3">
+            <objects>
+                <viewController storyboardIdentifier="Dstory" wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UYI-zZ-NSC" customClass="DViewController" customModule="HSpace" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yac-3K-BaI"/>
+                        <viewControllerLayoutGuide type="bottom" id="5hX-TI-zpD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WxO-Hq-DQf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo 2" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfc-PX-12o">
+                                <rect key="frame" x="51" y="4" width="273" height="172"/>
+                                <color key="tintColor" white="0.35999999999999999" alpha="1" colorSpace="deviceWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fH-xL-pSS">
+                                <rect key="frame" x="0.0" y="210" width="375" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Nkj-5h-nrH"/>
+                                    <constraint firstAttribute="width" constant="375" id="hFM-EU-L2i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0z-kd-3mo">
+                                <rect key="frame" x="0.0" y="246" width="375" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="JXg-ux-KRi"/>
+                                    <constraint firstAttribute="height" constant="21" id="SAc-PK-pom"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5hX-TI-zpD" firstAttribute="top" secondItem="T0z-kd-3mo" secondAttribute="bottom" constant="400" id="0iD-zw-ju1"/>
+                            <constraint firstAttribute="trailing" secondItem="T0z-kd-3mo" secondAttribute="trailing" id="EuA-qq-Uhh"/>
+                            <constraint firstItem="5fH-xL-pSS" firstAttribute="top" secondItem="rfc-PX-12o" secondAttribute="bottom" constant="34" id="FP6-lT-61d"/>
+                            <constraint firstItem="5fH-xL-pSS" firstAttribute="leading" secondItem="WxO-Hq-DQf" secondAttribute="leading" id="cgc-A6-BWP"/>
+                            <constraint firstItem="T0z-kd-3mo" firstAttribute="top" secondItem="5fH-xL-pSS" secondAttribute="bottom" constant="15" id="eif-dL-tkV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rfc-PX-12o" secondAttribute="trailing" constant="35" id="foq-us-mnK"/>
+                            <constraint firstAttribute="trailing" secondItem="5fH-xL-pSS" secondAttribute="trailing" id="iAJ-PT-LbD"/>
+                            <constraint firstItem="rfc-PX-12o" firstAttribute="top" secondItem="WxO-Hq-DQf" secondAttribute="top" constant="4" id="qB5-FZ-eQw"/>
+                            <constraint firstItem="T0z-kd-3mo" firstAttribute="leading" secondItem="WxO-Hq-DQf" secondAttribute="leading" id="rvU-Uo-x8G"/>
+                            <constraint firstItem="rfc-PX-12o" firstAttribute="leading" secondItem="WxO-Hq-DQf" secondAttribute="leadingMargin" constant="35" id="tk9-Px-kL5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imgVw" destination="rfc-PX-12o" id="5FH-n6-6Kh"/>
+                        <outlet property="lblComp" destination="T0z-kd-3mo" id="VZO-G2-8Ks"/>
+                        <outlet property="lblEmp" destination="5fH-xL-pSS" id="UN9-89-1vY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4D-JO-n4y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1330.4000000000001" y="-267.61619190404798"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Logo 2" width="112" height="118"/>
+    </resources>
+</document>

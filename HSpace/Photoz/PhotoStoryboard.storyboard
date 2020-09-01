@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo View Controller-->
+        <scene sceneID="zCT-mY-ebl">
+            <objects>
+                <viewController storyboardIdentifier="phtoStory" id="fmI-kw-45c" customClass="PhotoViewController" customModule="HSpace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ax0-1e-P6B">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G5k-0K-FfH">
+                                <rect key="frame" x="0.0" y="307" width="414" height="282"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmN-MF-rKI">
+                                <rect key="frame" x="155" y="704" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="shootPhoto:" destination="fmI-kw-45c" eventType="touchUpInside" id="C8u-5F-dAY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="G5k-0K-FfH" firstAttribute="centerX" secondItem="Ax0-1e-P6B" secondAttribute="centerX" id="BBY-Rf-BO1"/>
+                            <constraint firstItem="G5k-0K-FfH" firstAttribute="top" secondItem="9vo-g7-nHL" secondAttribute="top" constant="263" id="IIa-NT-Enl"/>
+                            <constraint firstItem="G5k-0K-FfH" firstAttribute="centerY" secondItem="Ax0-1e-P6B" secondAttribute="centerY" id="ahR-iZ-Rd4"/>
+                            <constraint firstItem="G5k-0K-FfH" firstAttribute="leading" secondItem="9vo-g7-nHL" secondAttribute="leading" id="fG1-jF-zJv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9vo-g7-nHL"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImgView" destination="G5k-0K-FfH" id="JRq-z1-G46"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kti-TV-lZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-142" y="-96"/>
+        </scene>
+    </scenes>
+</document>

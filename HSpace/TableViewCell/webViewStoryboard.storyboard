@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="Tcz-nR-iKe">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="Ie1-v0-20Y" customClass="webViewController" customModule="HSpace" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Da-Ip-m6b">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qGE-Uw-s03">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lr-qx-qeu">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <wkWebViewConfiguration key="configuration">
+                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                            <wkPreferences key="preferences"/>
+                                        </wkWebViewConfiguration>
+                                    </wkWebView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Tem-Sm-o4d">
+                                        <rect key="frame" x="187" y="389" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Tem-Sm-o4d" secondAttribute="height" multiplier="1:1" id="EOI-7p-hCF"/>
+                                            <constraint firstAttribute="height" constant="40" id="ERa-AZ-bIW"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="4lr-qx-qeu" firstAttribute="top" secondItem="qGE-Uw-s03" secondAttribute="top" id="9is-G6-fmr"/>
+                                    <constraint firstItem="Tem-Sm-o4d" firstAttribute="centerX" secondItem="qGE-Uw-s03" secondAttribute="centerX" id="CKs-Rb-BCf"/>
+                                    <constraint firstItem="Tem-Sm-o4d" firstAttribute="centerY" secondItem="qGE-Uw-s03" secondAttribute="centerY" id="LoJ-Dw-rJk"/>
+                                    <constraint firstAttribute="bottom" secondItem="4lr-qx-qeu" secondAttribute="bottom" id="c7w-bL-Zfc"/>
+                                    <constraint firstItem="4lr-qx-qeu" firstAttribute="leading" secondItem="qGE-Uw-s03" secondAttribute="leading" id="ukh-SR-YLJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="4lr-qx-qeu" secondAttribute="trailing" id="wQL-Ak-ym5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qGE-Uw-s03" firstAttribute="leading" secondItem="twd-mv-gfR" secondAttribute="leading" id="Lel-T3-o2k"/>
+                            <constraint firstItem="qGE-Uw-s03" firstAttribute="top" secondItem="twd-mv-gfR" secondAttribute="top" id="R12-Y2-Xsc"/>
+                            <constraint firstItem="twd-mv-gfR" firstAttribute="trailing" secondItem="qGE-Uw-s03" secondAttribute="trailing" id="Xn6-NI-fny"/>
+                            <constraint firstItem="twd-mv-gfR" firstAttribute="bottom" secondItem="qGE-Uw-s03" secondAttribute="bottom" id="ZER-mg-z3i"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="twd-mv-gfR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GdE-zF-4QC"/>
+                    <connections>
+                        <outlet property="webView" destination="4lr-qx-qeu" id="aFW-dq-dNs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lGd-bd-kBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3381.1594202898555" y="-1203.3482142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AwP-hR-E2D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lc8-yh-c9h" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="11d-8n-gPd">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="645-1U-2ad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2473.913043478261" y="-1203.3482142857142"/>
+        </scene>
+    </scenes>
+</document>

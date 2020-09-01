@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mts-a1-BwX">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Paus Reasn View Controller-->
+        <scene sceneID="657-aX-gXS">
+            <objects>
+                <viewController storyboardIdentifier="pausReasnStory" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="mts-a1-BwX" customClass="pausReasnViewController" customModule="AMTfm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h7q-OF-1Qd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 2-16" translatesAutoresizingMaskIntoConstraints="NO" id="G5n-g7-MdH">
+                                <rect key="frame" x="0.0" y="248" width="375" height="286"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="286" id="ZZW-5K-5Uy"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2WR-3H-P8V">
+                                <rect key="frame" x="55" y="334" width="265" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="265" id="0TU-b3-byP"/>
+                                    <constraint firstAttribute="height" constant="34" id="h6W-bJ-yFH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reason for Pause " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILq-oo-lSg">
+                                <rect key="frame" x="100" y="270" width="175" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REj-1M-d5D">
+                                <rect key="frame" x="134" y="461" width="117" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="WAX-Wb-Ly2"/>
+                                    <constraint firstAttribute="height" constant="56" id="k2z-MO-lcB"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnOk:" destination="mts-a1-BwX" eventType="touchUpInside" id="Nag-cR-4h5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuC-CM-gwM">
+                                <rect key="frame" x="55" y="400" width="249" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="jTN-48-rEi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="--Select Reason Type--">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectNumberOfRooms:" destination="mts-a1-BwX" eventType="touchUpInside" id="DOS-7L-L9H"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OZF-QL-Kzr">
+                                <rect key="frame" x="63" y="457" width="249" height="165"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="165" id="AOe-al-dpY"/>
+                                </constraints>
+                                <color key="sectionIndexBackgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="mts-a1-BwX" id="qss-4p-y09"/>
+                                    <outlet property="delegate" destination="mts-a1-BwX" id="2Lw-TL-KZE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="2WR-3H-P8V" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" constant="55" id="0Mv-m1-o7W"/>
+                            <constraint firstItem="IZE-b2-R3c" firstAttribute="trailing" secondItem="2WR-3H-P8V" secondAttribute="trailing" constant="55" id="4KF-71-ki3"/>
+                            <constraint firstItem="2WR-3H-P8V" firstAttribute="top" secondItem="ILq-oo-lSg" secondAttribute="bottom" constant="40" id="9nG-2g-tuF"/>
+                            <constraint firstItem="ILq-oo-lSg" firstAttribute="top" secondItem="IZE-b2-R3c" secondAttribute="top" constant="270" id="AFw-Yf-2IK"/>
+                            <constraint firstItem="IZE-b2-R3c" firstAttribute="trailing" secondItem="G5n-g7-MdH" secondAttribute="trailing" id="Gtg-8J-0ig"/>
+                            <constraint firstItem="REj-1M-d5D" firstAttribute="top" secondItem="zuC-CM-gwM" secondAttribute="bottom" constant="24" id="Ifa-pM-XZT"/>
+                            <constraint firstItem="IZE-b2-R3c" firstAttribute="trailing" secondItem="ILq-oo-lSg" secondAttribute="trailing" constant="100" id="KBv-15-2eU"/>
+                            <constraint firstItem="OZF-QL-Kzr" firstAttribute="top" secondItem="zuC-CM-gwM" secondAttribute="bottom" constant="20" id="Qkf-2d-KPj"/>
+                            <constraint firstItem="G5n-g7-MdH" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" id="Wub-9J-bD8"/>
+                            <constraint firstItem="zuC-CM-gwM" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" constant="55" id="YEj-Lp-QQm"/>
+                            <constraint firstItem="ILq-oo-lSg" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" constant="100" id="YRD-4j-xCo"/>
+                            <constraint firstItem="IZE-b2-R3c" firstAttribute="trailing" secondItem="zuC-CM-gwM" secondAttribute="trailing" constant="71" id="Ycy-uU-rEA"/>
+                            <constraint firstItem="REj-1M-d5D" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" constant="134" id="Z21-A3-z87"/>
+                            <constraint firstItem="OZF-QL-Kzr" firstAttribute="leading" secondItem="IZE-b2-R3c" secondAttribute="leading" constant="63" id="f2E-I2-VDG"/>
+                            <constraint firstItem="zuC-CM-gwM" firstAttribute="top" secondItem="IZE-b2-R3c" secondAttribute="top" constant="400" id="ifH-3o-NVL"/>
+                            <constraint firstItem="IZE-b2-R3c" firstAttribute="trailing" secondItem="OZF-QL-Kzr" secondAttribute="trailing" constant="63" id="ouu-X3-Ivc"/>
+                            <constraint firstItem="G5n-g7-MdH" firstAttribute="top" secondItem="IZE-b2-R3c" secondAttribute="top" constant="248" id="won-bC-ErH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IZE-b2-R3c"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnNumberOfRooms" destination="zuC-CM-gwM" id="3d1-fe-Yz5"/>
+                        <outlet property="tblDropDown" destination="OZF-QL-Kzr" id="0jA-cD-THK"/>
+                        <outlet property="tblDropDownHC" destination="AOe-al-dpY" id="PES-Md-FRG"/>
+                        <outlet property="txtRsn" destination="2WR-3H-P8V" id="Hla-CY-0qi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBe-in-6zS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28" y="187.55622188905548"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group 2-16" width="303" height="286"/>
+    </resources>
+</document>

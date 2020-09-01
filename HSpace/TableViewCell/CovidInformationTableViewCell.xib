@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CovidInformationTableViewCell" rowHeight="546" id="WWc-0G-TYq" customClass="CovidInformationTableViewCell" customModule="HSpace" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="431" height="514"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WWc-0G-TYq" id="SJ5-Ue-0Nj">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="514"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Warning" translatesAutoresizingMaskIntoConstraints="NO" id="h5w-yw-f5x">
+                        <rect key="frame" x="20" y="20" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="mF7-TI-qTm"/>
+                            <constraint firstAttribute="height" constant="25" id="z20-sk-Cc0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COVID Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGg-px-A0p">
+                        <rect key="frame" x="57" y="20.5" width="177" height="24.5"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGP-lD-Nfb">
+                        <rect key="frame" x="20" y="55.5" width="391" height="58"/>
+                        <attributedString key="attributedText">
+                            <fragment>
+                                <string key="content">Some instructions go here. For more on the information click here. All information here. There shall be some more information here for the employees</string>
+                                <attributes>
+                                    <font key="NSFont" size="15" name="Helvetica"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="3" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogs-pY-Rci">
+                        <rect key="frame" x="20" y="129.5" width="391" height="50"/>
+                        <color key="backgroundColor" red="1" green="0.35686274509999999" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="pt5-7g-7Eq"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleColor" red="0.91764705879999997" green="0.92941176469999998" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="callCovidcntre" destination="WWc-0G-TYq" eventType="touchUpInside" id="LSR-dJ-OGd"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="COVID Help Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPa-33-PR8">
+                        <rect key="frame" x="141.5" y="144.5" width="148" height="20"/>
+                        <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                        <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="CallIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PTs-y7-Bmc">
+                        <rect key="frame" x="105.5" y="144.5" width="22" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="EFJ-C5-cXb"/>
+                            <constraint firstAttribute="width" constant="22" id="Yxv-11-JvK"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xgr-0D-oHT" userLabel="Seperator View">
+                        <rect key="frame" x="20" y="195.5" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="5IC-3W-VlG"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="COVID 19 Do's and Dont's" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ce-Gl-9gM">
+                        <rect key="frame" x="20" y="216.5" width="204" height="20"/>
+                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5JB-7J-a9u" userLabel="Seperator View 2">
+                        <rect key="frame" x="20" y="256.5" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="vqO-WR-y2D"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="WVA-c5-aqn">
+                        <rect key="frame" x="391" y="216.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="E5K-Oe-ICl"/>
+                            <constraint firstAttribute="height" constant="20" id="cqs-Ff-rWh"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="safety measure against COVID 19" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0j-Q7-vX4">
+                        <rect key="frame" x="20" y="277.5" width="256" height="20"/>
+                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AiE-kP-Ohp" userLabel="Seperator View 3">
+                        <rect key="frame" x="20" y="317.5" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="GQX-I2-ipU"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="yK9-3h-ILk">
+                        <rect key="frame" x="391" y="277.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="45C-aN-gg6"/>
+                            <constraint firstAttribute="width" constant="20" id="LKO-cS-p6a"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Report COVID incident" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdh-Xb-B14">
+                        <rect key="frame" x="20" y="338.5" width="173.5" height="20"/>
+                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXl-cB-hUK" userLabel="Seperator View 4">
+                        <rect key="frame" x="20" y="502.5" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xjr-YP-hEj"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="qXh-1C-7pL">
+                        <rect key="frame" x="391" y="338.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="bpy-ou-qid"/>
+                            <constraint firstAttribute="width" constant="20" id="c1E-db-RJH"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zlw-7M-v6h">
+                        <rect key="frame" x="381" y="211" width="30" height="30"/>
+                        <connections>
+                            <action selector="btnRprtIssu:" destination="WWc-0G-TYq" eventType="touchUpInside" id="1ro-T0-sm9"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWz-qk-10B">
+                        <rect key="frame" x="381" y="333" width="30" height="30"/>
+                        <connections>
+                            <action selector="btnAttndnce:" destination="WWc-0G-TYq" eventType="touchUpInside" id="FSr-MY-BLf"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kuw-C1-rsG">
+                        <rect key="frame" x="381" y="272" width="30" height="30"/>
+                        <connections>
+                            <action selector="btnSfty" destination="WWc-0G-TYq" eventType="touchUpInside" id="I2h-hb-1Q0"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RlM-Tn-vf8" userLabel="Seperator View 2">
+                        <rect key="frame" x="20" y="371" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Myq-2C-UrP"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Attendance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60N-3v-gDo">
+                        <rect key="frame" x="20" y="392" width="87.5" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjp-vl-b4X">
+                        <rect key="frame" x="381" y="388" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <action selector="btnSfty" destination="WWc-0G-TYq" eventType="touchUpInside" id="YJB-nd-0Vk"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eL3-Qf-qWx" userLabel="Seperator View 2">
+                        <rect key="frame" x="20" y="430" width="391" height="1"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="mTo-Vh-Fcv"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="l7e-1g-GOO">
+                        <rect key="frame" x="391" y="392" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="nMA-pC-5Fq"/>
+                            <constraint firstAttribute="height" constant="20" id="r0a-g6-csr"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" red="0.92549639939999995" green="0.92547899479999995" blue="0.9254907966" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <constraints>
+                    <constraint firstItem="AiE-kP-Ohp" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="0Jr-Jn-umB"/>
+                    <constraint firstItem="SPa-33-PR8" firstAttribute="centerY" secondItem="ogs-pY-Rci" secondAttribute="centerY" id="2NJ-hL-C8l"/>
+                    <constraint firstItem="j0j-Q7-vX4" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="3bF-fX-w5e"/>
+                    <constraint firstItem="mGP-lD-Nfb" firstAttribute="leading" secondItem="h5w-yw-f5x" secondAttribute="leading" id="4Ea-xI-IHy"/>
+                    <constraint firstItem="h5w-yw-f5x" firstAttribute="top" secondItem="SJ5-Ue-0Nj" secondAttribute="top" constant="20" id="8ph-jF-1EY"/>
+                    <constraint firstItem="Zlw-7M-v6h" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="9Ny-Ok-MR6"/>
+                    <constraint firstItem="RlM-Tn-vf8" firstAttribute="top" secondItem="sWz-qk-10B" secondAttribute="bottom" constant="8" id="9yn-5g-PAk"/>
+                    <constraint firstItem="8Ce-Gl-9gM" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="A3L-EE-L55"/>
+                    <constraint firstItem="Xgr-0D-oHT" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="EBO-0M-buH"/>
+                    <constraint firstItem="pdh-Xb-B14" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="K9y-0F-s44"/>
+                    <constraint firstItem="Xgr-0D-oHT" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="L42-p6-agx"/>
+                    <constraint firstItem="SPa-33-PR8" firstAttribute="leading" secondItem="PTs-y7-Bmc" secondAttribute="trailing" constant="14" id="Ocp-OQ-yV3"/>
+                    <constraint firstItem="yK9-3h-ILk" firstAttribute="centerY" secondItem="j0j-Q7-vX4" secondAttribute="centerY" id="Oe9-86-d0N"/>
+                    <constraint firstItem="AiE-kP-Ohp" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="QCN-lN-VG2"/>
+                    <constraint firstItem="WVA-c5-aqn" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="QaH-cW-ENC"/>
+                    <constraint firstItem="SPa-33-PR8" firstAttribute="centerX" secondItem="ogs-pY-Rci" secondAttribute="centerX" id="UGS-kQ-VDu"/>
+                    <constraint firstItem="WVA-c5-aqn" firstAttribute="centerY" secondItem="8Ce-Gl-9gM" secondAttribute="centerY" id="VAh-ul-FFN"/>
+                    <constraint firstItem="sWz-qk-10B" firstAttribute="top" secondItem="AiE-kP-Ohp" secondAttribute="bottom" constant="14.5" id="XR6-UR-alx"/>
+                    <constraint firstItem="RXl-cB-hUK" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="Yhn-Y0-yhO"/>
+                    <constraint firstItem="5JB-7J-a9u" firstAttribute="top" secondItem="8Ce-Gl-9gM" secondAttribute="bottom" constant="20" id="Zjg-A6-3A4"/>
+                    <constraint firstItem="mGP-lD-Nfb" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="aUu-Ee-8bR"/>
+                    <constraint firstItem="Zlw-7M-v6h" firstAttribute="top" secondItem="Xgr-0D-oHT" secondAttribute="bottom" constant="14.5" id="d0O-VP-XWb"/>
+                    <constraint firstItem="5JB-7J-a9u" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="d3f-10-7Xm"/>
+                    <constraint firstItem="5JB-7J-a9u" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="eBy-ci-q13"/>
+                    <constraint firstItem="sWz-qk-10B" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="gJe-gM-ms0"/>
+                    <constraint firstItem="j0j-Q7-vX4" firstAttribute="top" secondItem="5JB-7J-a9u" secondAttribute="bottom" constant="20" id="gto-C9-qaT"/>
+                    <constraint firstItem="WGg-px-A0p" firstAttribute="leading" secondItem="h5w-yw-f5x" secondAttribute="trailing" constant="12" id="gu1-3J-CQH"/>
+                    <constraint firstItem="qXh-1C-7pL" firstAttribute="centerY" secondItem="pdh-Xb-B14" secondAttribute="centerY" id="gv0-kz-Mzd"/>
+                    <constraint firstItem="Xgr-0D-oHT" firstAttribute="top" secondItem="ogs-pY-Rci" secondAttribute="bottom" constant="16" id="h83-OD-LS2"/>
+                    <constraint firstItem="mGP-lD-Nfb" firstAttribute="top" secondItem="h5w-yw-f5x" secondAttribute="bottom" constant="10.5" id="iO0-qB-chK"/>
+                    <constraint firstItem="kuw-C1-rsG" firstAttribute="top" secondItem="5JB-7J-a9u" secondAttribute="bottom" constant="14.5" id="j12-n8-sXV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ogs-pY-Rci" secondAttribute="trailing" id="jCu-EZ-Nz4"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qXh-1C-7pL" secondAttribute="trailing" id="jZP-Um-kar"/>
+                    <constraint firstItem="WGg-px-A0p" firstAttribute="centerY" secondItem="h5w-yw-f5x" secondAttribute="centerY" id="jru-KR-nY6"/>
+                    <constraint firstItem="RlM-Tn-vf8" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leadingMargin" id="jzI-St-t42"/>
+                    <constraint firstItem="8Ce-Gl-9gM" firstAttribute="top" secondItem="Xgr-0D-oHT" secondAttribute="bottom" constant="20" id="mvt-N2-hSY"/>
+                    <constraint firstItem="ogs-pY-Rci" firstAttribute="top" secondItem="mGP-lD-Nfb" secondAttribute="bottom" constant="16" id="my8-xP-2NE"/>
+                    <constraint firstItem="RXl-cB-hUK" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="nSW-bG-vmA"/>
+                    <constraint firstItem="PTs-y7-Bmc" firstAttribute="centerY" secondItem="SPa-33-PR8" secondAttribute="centerY" id="rP4-OK-hEX"/>
+                    <constraint firstAttribute="bottom" secondItem="RXl-cB-hUK" secondAttribute="bottom" constant="10.5" id="rg7-y8-KPc"/>
+                    <constraint firstItem="pdh-Xb-B14" firstAttribute="top" secondItem="AiE-kP-Ohp" secondAttribute="bottom" constant="20" id="rpI-T4-eIn"/>
+                    <constraint firstItem="yK9-3h-ILk" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="ttJ-T6-Qbm"/>
+                    <constraint firstItem="ogs-pY-Rci" firstAttribute="leading" secondItem="mGP-lD-Nfb" secondAttribute="leading" id="w6Y-EJ-Dm8"/>
+                    <constraint firstItem="h5w-yw-f5x" firstAttribute="leading" secondItem="SJ5-Ue-0Nj" secondAttribute="leading" constant="20" id="xRP-bw-znz"/>
+                    <constraint firstItem="RXl-cB-hUK" firstAttribute="top" secondItem="pdh-Xb-B14" secondAttribute="bottom" constant="20" id="xVI-b8-3NB"/>
+                    <constraint firstItem="kuw-C1-rsG" firstAttribute="trailing" secondItem="SJ5-Ue-0Nj" secondAttribute="trailingMargin" id="xx0-1O-d9C"/>
+                    <constraint firstItem="AiE-kP-Ohp" firstAttribute="top" secondItem="j0j-Q7-vX4" secondAttribute="bottom" constant="20" id="z2T-Mp-AwS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-310.86956521739131" y="128.57142857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Arrow" width="4" height="6.5"/>
+        <image name="CallIcon" width="22" height="21"/>
+        <image name="Warning" width="27" height="24"/>
+    </resources>
+</document>

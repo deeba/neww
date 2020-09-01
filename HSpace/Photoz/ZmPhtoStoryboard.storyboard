@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Zm Phto View Controller-->
+        <scene sceneID="kc0-qk-U1G">
+            <objects>
+                <viewController storyboardIdentifier="ZmPhtoStory" id="OPT-0e-t7l" customClass="ZmPhtoViewController" customModule="HelixSense" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3SW-SQ-u3q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 4-1" translatesAutoresizingMaskIntoConstraints="NO" id="G9d-4s-SWN">
+                                <rect key="frame" x="0.0" y="40" width="414" height="55"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Order Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXw-O3-dkd">
+                                <rect key="frame" x="44" y="58" width="139" height="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-Pf-7iB">
+                                <rect key="frame" x="1" y="44" width="54" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="5jP-c2-1Qe"/>
+                                    <constraint firstAttribute="width" constant="54" id="acI-So-Lfi"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnGoBac:" destination="OPT-0e-t7l" eventType="touchUpInside" id="4Az-Gn-unA"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nf0-ea-HWG">
+                                <rect key="frame" x="0.0" y="103" width="414" height="793"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="Asm-CR-mTP"/>
+                                    <constraint firstAttribute="height" constant="793" id="uON-TT-xkT"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EXw-O3-dkd" firstAttribute="leading" secondItem="Pxa-ay-dUA" secondAttribute="leading" constant="44" id="7QQ-r0-waF"/>
+                            <constraint firstItem="nf0-ea-HWG" firstAttribute="leading" secondItem="Pxa-ay-dUA" secondAttribute="leading" id="KMG-2w-3g7"/>
+                            <constraint firstItem="G9d-4s-SWN" firstAttribute="leading" secondItem="nf0-ea-HWG" secondAttribute="leading" id="Uho-7h-TLA"/>
+                            <constraint firstItem="G9d-4s-SWN" firstAttribute="bottom" secondItem="fZw-Pf-7iB" secondAttribute="bottom" id="WSb-zo-ABy"/>
+                            <constraint firstItem="fZw-Pf-7iB" firstAttribute="top" secondItem="Pxa-ay-dUA" secondAttribute="top" id="ojk-WW-iLr"/>
+                            <constraint firstItem="nf0-ea-HWG" firstAttribute="trailing" secondItem="Pxa-ay-dUA" secondAttribute="trailing" id="wX7-X3-lh5"/>
+                            <constraint firstItem="fZw-Pf-7iB" firstAttribute="leading" secondItem="Pxa-ay-dUA" secondAttribute="leading" constant="1" id="xht-Yx-Zkh"/>
+                            <constraint firstItem="nf0-ea-HWG" firstAttribute="top" secondItem="G9d-4s-SWN" secondAttribute="bottom" constant="8" id="y9G-wZ-dwq"/>
+                            <constraint firstItem="EXw-O3-dkd" firstAttribute="top" secondItem="Pxa-ay-dUA" secondAttribute="top" constant="14" id="yFu-dh-XyB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Pxa-ay-dUA"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImgVw" destination="nf0-ea-HWG" id="2hs-Vf-uVT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6LH-Ll-Rop" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-107.24637681159422" y="-56.25"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Group 4-1" width="414" height="55"/>
+    </resources>
+</document>
