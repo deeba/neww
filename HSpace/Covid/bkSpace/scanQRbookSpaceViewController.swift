@@ -38,7 +38,7 @@ extension scanQRbookSpaceViewController: AVCaptureMetadataOutputObjectsDelegate 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             APIClient_redesign.shared().getTokenz
                                {status in
-                           APIClient_redesign.shared().getOccpied(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz")) { cnt in
+                           APIClient_redesign.shared().putOccpied(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz")) { cnt in
                            LoaderSpin.shared.hideLoader()
                              if cnt {
                               }

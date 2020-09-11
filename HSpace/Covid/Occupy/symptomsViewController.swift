@@ -44,7 +44,7 @@ class symptomsViewController: UIViewController {
         APIClient_redesign.shared().getTokenz { status in
         LoaderSpin.shared.hideLoader()
         if status {
-        APIClient_redesign.shared().getSymptomsLst(chkLst_id: String(configurationModls.check_list_ids)){ count in
+        APIClient_redesign.shared().postSymptomsLst(chkLst_id: String(configurationModls.check_list_ids)){ count in
             self.checklist = count
             self.itemTableView.reloadData()
         }
@@ -77,14 +77,14 @@ class symptomsViewController: UIViewController {
                 self.selFlg = true
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                APIClient.shared().submtSymptomAnswers(activtyId:String(self.checklist[i].symptmsId),answr:self.checklist[i].answer){ id in
+                APIClient_redesign.shared().postSymptomAnswers(activtyId:String(self.checklist[i].symptmsId),answr:self.checklist[i].answer){ id in
                 }
                 }
         }
         }
         }
-        let storyboard = UIStoryboard(name: "OccpyStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "nert") as! gnrlPractizViewController
+        let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.gnrlpractizViewController) as! gnrlPractizViewController
+        
         mainTabBarController.symptms = selFlg
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.pushViewController(mainTabBarController, animated: true)

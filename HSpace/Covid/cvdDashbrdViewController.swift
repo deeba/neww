@@ -21,6 +21,7 @@ import OneSignal
 }
  */
 class cvdDashbrdViewController: UIViewController {
+    var help_line_mobile = ""
     var frstApprnce: Bool!
     var prestats = false
     var enable_prescreen = false
@@ -54,8 +55,7 @@ class cvdDashbrdViewController: UIViewController {
                self.navigationController?.pushViewController(mainTabBarController, animated: true)
             }
         else if btnStatuz == "access"{
-             let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-            let mainTabBarController = storyboard.instantiateViewController(identifier: "OccpyRedesign") as! OccpyRedesignViewController
+            let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.occpyRedesign) as! OccpyRedesignViewController
             mainTabBarController.wrkSpac = wrkSpace.text
             mainTabBarController.wrkSpacPth = wrkSpaceNum.text
             mainTabBarController.Dte = lbldteOccupy.text
@@ -68,8 +68,7 @@ class cvdDashbrdViewController: UIViewController {
             self.navigationController?.pushViewController(mainTabBarController, animated: true)
           }
         else if btnStatuz == "occupy"{
-            let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-            let mainTabBarController = storyboard.instantiateViewController(identifier: "scanQROccpySpace") as! scanQRbookSpaceViewController
+            let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.scanqrOccpySpace) as! scanQRbookSpaceViewController
             self.navigationController?.isNavigationBarHidden = false
             self.navigationController?.pushViewController(mainTabBarController, animated: true)
         }
@@ -161,8 +160,7 @@ class cvdDashbrdViewController: UIViewController {
     }
     private func reschedul() {
         cnclBkg()
-        let storyBoard: UIStoryboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-         let ValidationVC = storyBoard.instantiateViewController(withIdentifier: "DateSelect") as! DateSelectViewController
+        let ValidationVC = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.dateSelectViewController) as! DateSelectViewController
          let appDelegate = UIApplication.shared.delegate as! AppDelegate
          appDelegate.window?.rootViewController = ValidationVC
     }
@@ -183,16 +181,16 @@ class cvdDashbrdViewController: UIViewController {
          APIClient_redesign.shared().getTokenz { status in
            if status {
              APIClient_redesign.shared().getUserinformation(){ count in
-                if count {
-                    self.lblSpace.text = "You are in " + " " + usrInfoModls.company_name
-                    self.lblName.text = "Hello " +  usrInfoModls.name
+                if count.count > 0 {
+                    self.lblSpace.text = "You are in " + " " + count[0].company_name
+                    self.lblName.text = "Hello " +  count[0].name
                     let tags = [
-                        "user_id": usrInfoModls.user_id,
-                        "employee_id": usrInfoModls.employee_id,
-                        "user_name": usrInfoModls.employee_name,
+                        "user_id": count[0].user_id,
+                        "employee_id": count[0].employee_id,
+                        "user_name": count[0].employee_name,
                         "build": "demo" ,
                        "instance": "demo.helixsense.com",
-                       "current_company": usrInfoModls.company_id
+                       "current_company": count[0].company_id
                         ] as [String : Any]
                       OneSignal.sendTags(tags as [AnyHashable : Any], onSuccess: { (result) in
                         print("success!")
@@ -203,21 +201,22 @@ class cvdDashbrdViewController: UIViewController {
                 }
              }
                 APIClient_redesign.shared().getConfiguration(){ count in
-                   if count {
+                    if count.count > 0 {
+                            self.help_line_mobile = count[0].help_line_mobile
                             self.categories.removeAll()
-                            self.enable_prescreen = configurationModls.enable_prescreen
-                            self.instanceOfUser.writeAnyData(key: "covidDos", value: configurationModls.enable_other_resources_url)
-                            self.categories.append(dshBrdList(name: configurationModls.enable_other_resources_name, Id: String(configurationModls.enable_other_resources_id),url:configurationModls.enable_other_resources_url))
-                            self.instanceOfUser.writeAnyData(key: "covidsafety", value: configurationModls.safety_resources_url)
-                            self.categories.append(dshBrdList(name: configurationModls.safety_resources_name, Id: String(configurationModls.safety_resources_id), url: configurationModls.safety_resources_url))
+                            self.enable_prescreen = count[0].enable_prescreen
+                    self.instanceOfUser.writeAnyData(key: "covidDos", value: count[0].enable_other_resources_url)
+                            self.categories.append(dshBrdList(name: count[0].enable_other_resources_name, Id: String(count[0].enable_other_resources_id),url:count[0].enable_other_resources_url))
+                            self.instanceOfUser.writeAnyData(key: "covidsafety", value: count[0].safety_resources_url)
+                            self.categories.append(dshBrdList(name: count[0].safety_resources_name, Id: String(count[0].safety_resources_id), url: count[0].safety_resources_url))
                             self.categories.append(dshBrdList(name: "Report COVID incident", Id: "incident", url: ""))
                             self.categories.append(dshBrdList(name: "Report an issue", Id: "issue", url: ""))
                             DispatchQueue.main.async {
                                 //Update UI
                                 self.tableView.reloadData()
                             }
-                       self.lblCovid.text = configurationModls.title
-                      var imageStr =  configurationModls.enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
+                       self.lblCovid.text = count[0].title
+                      var imageStr =  count[0].enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
                        imageStr =  String(imageStr.filter { !"\r\n\n\t\r".contains($0) })
                        self.covidInfo.text = imageStr
                             self.helpCenter.text  = "COVID Help Center"
@@ -225,32 +224,46 @@ class cvdDashbrdViewController: UIViewController {
                 }
             APIClient_redesign.shared().getCurrentSchedule()
             { count in
-                self.prestats = curntSchedulModll.prescreen_status
-                if curntSchedulModll.space_path_name == "false"
-                {
-                    curntSchedulModll.space_path_name = ""
-                }
-                if curntSchedulModll.space_name == "false"
-                {
-                    curntSchedulModll.space_name = ""
-                }
+                if count.count > 0
+                                   {
+                        var space_path_name,space_name:String
+                        self.prestats = count[0].prescreen_status// curntSchedulModll.prescreen_status
+                        if count[0].space_path_name == "false"
+                        {
+                            space_path_name = ""
+                        }
+                        else
+                        {
+                            space_path_name = count[0].space_path_name
+                        }
+                        if count[0].space_name == "false"
+                        {
+                            space_name = ""
+                        }
+                        else
+                        {
+                            space_name = count[0].space_name
+                        }
 
-                self.lblWrkschedul.isHidden = false
-                self.wrkSpace.text = curntSchedulModll.space_path_name // space_path_name
-                self.lblplndStats.text = curntSchedulModll.planned_status + " " +  curntSchedulModll.shift_name
-                self.wrkSpaceNum.text = curntSchedulModll.space_name
+                        self.lblWrkschedul.isHidden = false
+                        self.wrkSpace.text = space_path_name // space_path_name
+                        self.lblplndStats.text = count[0].planned_status + " " +  count[0].shift_name
+                        self.wrkSpaceNum.text = space_name
 
-                if !count
-                {//book
-                    self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
-                    self.setupUIBook()
+                         
                 }
-                else
+                if count.count > 0
                 {
                     self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
                     self.setupUIOccupy()
                 }
+                else
+                {//book
+                    
+                    self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
+                    self.setupUIBook()
                 }
+            }
                 }
 
            }
@@ -1011,12 +1024,11 @@ class cvdDashbrdViewController: UIViewController {
        }
     
     @IBAction func btnCall(_ sender: UIButton) {
-        callNumber(phoneNumber: configurationModls.help_line_mobile)
+        callNumber(phoneNumber: help_line_mobile)
     }
     var categories = [dshBrdList]()
     @IBAction func btnBook(_ sender: Any) {//book a space
-        let storyBoard: UIStoryboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-         let ValidationVC = storyBoard.instantiateViewController(withIdentifier: "DateSelect") as! DateSelectViewController
+        let ValidationVC = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.dateSelectViewController) as! DateSelectViewController
          let appDelegate = UIApplication.shared.delegate as! AppDelegate
          appDelegate.window?.rootViewController = ValidationVC
         }
@@ -1062,16 +1074,16 @@ class cvdDashbrdViewController: UIViewController {
          APIClient_redesign.shared().getTokenz { status in
            if status {
              APIClient_redesign.shared().getUserinformation(){ count in
-                if count {
-                    self.lblSpace.text = "You are in " + " " + usrInfoModls.company_name
-                    self.lblName.text = "Hello " +  usrInfoModls.name
+                if count.count > 0 {
+                    self.lblSpace.text = "You are in " + " " + count[0].company_name
+                    self.lblName.text = "Hello " +  count[0].name
                     let tags = [
-                        "user_id": usrInfoModls.user_id,
-                        "employee_id": usrInfoModls.employee_id,
-                        "user_name": usrInfoModls.employee_name,
+                        "user_id": count[0].user_id,
+                        "employee_id": count[0].employee_id,
+                        "user_name": count[0].employee_name,
                         "build": "demo" ,
                        "instance": "demo.helixsense.com",
-                       "current_company": usrInfoModls.company_id
+                       "current_company": count[0].company_id
                         ] as [String : Any]
                       OneSignal.sendTags(tags as [AnyHashable : Any], onSuccess: { (result) in
                         print("success!")
@@ -1083,21 +1095,22 @@ class cvdDashbrdViewController: UIViewController {
              }
          //    sleep(1)
                 APIClient_redesign.shared().getConfiguration(){ count in
-                   if count {
+                   if count.count > 0 {
+                            self.help_line_mobile = count[0].help_line_mobile
                             self.categories.removeAll()
-                            self.enable_prescreen = configurationModls.enable_prescreen
-                            self.instanceOfUser.writeAnyData(key: "covidDos", value: configurationModls.enable_other_resources_url)
-                            self.categories.append(dshBrdList(name: configurationModls.enable_other_resources_name, Id: String(configurationModls.enable_other_resources_id),url:configurationModls.enable_other_resources_url))
-                            self.instanceOfUser.writeAnyData(key: "covidsafety", value: configurationModls.safety_resources_url)
-                            self.categories.append(dshBrdList(name: configurationModls.safety_resources_name, Id: String(configurationModls.safety_resources_id), url: configurationModls.safety_resources_url))
+                            self.enable_prescreen = count[0].enable_prescreen
+                            self.instanceOfUser.writeAnyData(key: "covidDos", value: count[0].enable_other_resources_url)
+                            self.categories.append(dshBrdList(name: count[0].enable_other_resources_name, Id: String(count[0].enable_other_resources_id),url:count[0].enable_other_resources_url))
+                            self.instanceOfUser.writeAnyData(key: "covidsafety", value: count[0].safety_resources_url)
+                            self.categories.append(dshBrdList(name: count[0].safety_resources_name, Id: String(count[0].safety_resources_id), url: count[0].safety_resources_url))
                             self.categories.append(dshBrdList(name: "Report COVID incident", Id: "incident", url: ""))
                             self.categories.append(dshBrdList(name: "Report an issue", Id: "issue", url: ""))
                             DispatchQueue.main.async {
                                 //Update UI
                                 self.tableView.reloadData()
                             }
-                       self.lblCovid.text = configurationModls.title
-                      var imageStr =  configurationModls.enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
+                       self.lblCovid.text = count[0].title
+                      var imageStr =  count[0].enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
                        imageStr =  String(imageStr.filter { !"\r\n\n\t\r".contains($0) })
                        self.covidInfo.text = imageStr
                             self.helpCenter.text  = "COVID Help Center"
@@ -1107,32 +1120,46 @@ class cvdDashbrdViewController: UIViewController {
           //   sleep(1)
             APIClient_redesign.shared().getCurrentSchedule()
             { count in
-                self.prestats = curntSchedulModll.prescreen_status
-                if curntSchedulModll.space_path_name == "false"
+                if count.count > 0
                 {
-                    curntSchedulModll.space_path_name = ""
-                }
-                if curntSchedulModll.space_name == "false"
+                var space_path_name,space_name:String
+                self.prestats = count[0].prescreen_status// curntSchedulModll.prescreen_status
+                if count[0].space_path_name == "false"
                 {
-                    curntSchedulModll.space_name = ""
-                }
-
-                self.lblWrkschedul.isHidden = false
-                self.wrkSpace.text = curntSchedulModll.space_path_name // space_path_name
-                self.lblplndStats.text = curntSchedulModll.planned_status + " " +  curntSchedulModll.shift_name
-                self.wrkSpaceNum.text = curntSchedulModll.space_name
-
-                if !count
-                {//book
-                    self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
-                    self.setupUIBook()
+                    space_path_name = ""
                 }
                 else
                 {
-                    self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
-                    self.setupUIOccupy()
+                    space_path_name = count[0].space_path_name
                 }
+                if count[0].space_name == "false"
+                {
+                    space_name = ""
                 }
+                else
+                {
+                    space_name = count[0].space_name
+                }
+
+                self.lblWrkschedul.isHidden = false
+                self.wrkSpace.text = space_path_name // space_path_name
+                self.lblplndStats.text = count[0].planned_status + " " +  count[0].shift_name
+                self.wrkSpaceNum.text = space_name
+
+                
+                }
+                if count.count > 0
+                   {
+                       self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
+                       self.setupUIOccupy()
+                   }
+                   else
+                   {//book
+                       
+                       self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
+                       self.setupUIBook()
+                   }
+            }
                 }
 
            }
@@ -1337,19 +1364,19 @@ class cvdDashbrdViewController: UIViewController {
              APIClient_redesign.shared().getTokenz { status in
                if status {
                  APIClient_redesign.shared().getUserinformation(){ count in
-                    if count {
-                        self.lblSpace.text = "You are in " + " " + usrInfoModls.company_name
-                        self.lblName.text = "Hello " +  usrInfoModls.name
+                    if count.count > 0 {
+                        self.lblSpace.text = "You are in " + " " + count[0].company_name
+                        self.lblName.text = "Hello " +  count[0].name
                         let tags = [
-                            "user_id": usrInfoModls.user_id,
-                            "employee_id": usrInfoModls.employee_id,
-                            "user_name": usrInfoModls.employee_name,
+                            "user_id": count[0].user_id,
+                            "employee_id": count[0].employee_id,
+                            "user_name": count[0].employee_name,
                             "build": "demo" ,
                            "instance": "demo.helixsense.com",
-                           "current_company": usrInfoModls.company_id
+                           "current_company": count[0].company_id
                             ] as [String : Any]
                           OneSignal.sendTags(tags as [AnyHashable : Any], onSuccess: { (result) in
-                            print("success!")
+                           // print("success!")
                         }) { (error) in
                           print("Fail!")
                         }
@@ -1358,22 +1385,23 @@ class cvdDashbrdViewController: UIViewController {
                  }
                // sleep(1)
                     APIClient_redesign.shared().getConfiguration(){ count in
-                       if count {
+                      if count.count > 0 {
+                                self.help_line_mobile = count[0].help_line_mobile
                                 self.categories.removeAll()
-                                self.enable_prescreen = configurationModls.enable_prescreen
-                                self.instanceOfUser.writeAnyData(key: "covidDos", value: configurationModls.enable_other_resources_url)
-                                self.categories.append(dshBrdList(name: configurationModls.enable_other_resources_name, Id: String(configurationModls.enable_other_resources_id),url:configurationModls.enable_other_resources_url))
-                                self.instanceOfUser.writeAnyData(key: "covidsafety", value: configurationModls.safety_resources_url)
-                                self.categories.append(dshBrdList(name: configurationModls.safety_resources_name, Id: String(configurationModls.safety_resources_id), url: configurationModls.safety_resources_url))
+                                self.enable_prescreen = count[0].enable_prescreen
+                                self.instanceOfUser.writeAnyData(key: "covidDos", value: count[0].enable_other_resources_url)
+                                self.categories.append(dshBrdList(name: count[0].enable_other_resources_name, Id: String(count[0].enable_other_resources_id),url:count[0].enable_other_resources_url))
+                                self.instanceOfUser.writeAnyData(key: "covidsafety", value: count[0].safety_resources_url)
+                                self.categories.append(dshBrdList(name: count[0].safety_resources_name, Id: String(count[0].safety_resources_id), url: count[0].safety_resources_url))
                                 self.categories.append(dshBrdList(name: "Report COVID incident", Id: "incident", url: ""))
                                 self.categories.append(dshBrdList(name: "Report an issue", Id: "issue", url: ""))
                                 DispatchQueue.main.async {
                                     //Update UI
                                     self.tableView.reloadData()
                                 }
-                           self.lblCovid.text = configurationModls.title
-                          var imageStr =  configurationModls.enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
-                           imageStr =  String(imageStr.filter { !"\r\n\n\t\r".contains($0) })
+                           self.lblCovid.text = count[0].title
+                          var imageStr =  count[0].enable_landing_page_name.trimmingCharacters(in: .whitespacesAndNewlines)
+                           imageStr =  String(imageStr.filter { !"\r\n\n\t\r".contains($0)})
                            self.covidInfo.text = imageStr
                                 self.helpCenter.text  = "COVID Help Center"
                        }
@@ -1382,32 +1410,46 @@ class cvdDashbrdViewController: UIViewController {
                //  sleep(1)
                 APIClient_redesign.shared().getCurrentSchedule()
                 { count in
-                    self.prestats = curntSchedulModll.prescreen_status
-                    if curntSchedulModll.space_path_name == "false"
+                    if count.count > 0
                     {
-                        curntSchedulModll.space_path_name = ""
-                    }
-                    if curntSchedulModll.space_name == "false"
-                    {
-                        curntSchedulModll.space_name = ""
-                    }
+                                var space_path_name,space_name:String
+                                self.prestats = count[0].prescreen_status// curntSchedulModll.prescreen_status
+                                if count[0].space_path_name == "false"
+                                {
+                                    space_path_name = ""
+                                }
+                                else
+                                {
+                                    space_path_name = count[0].space_path_name
+                                }
+                                if count[0].space_name == "false"
+                                {
+                                    space_name = ""
+                                }
+                                else
+                                {
+                                    space_name = count[0].space_name
+                                }
 
-                    self.lblWrkschedul.isHidden = false
-                    self.wrkSpace.text = curntSchedulModll.space_path_name // space_path_name
-                    self.lblplndStats.text = curntSchedulModll.planned_status + " " +  curntSchedulModll.shift_name
-                    self.wrkSpaceNum.text = curntSchedulModll.space_name
+                                self.lblWrkschedul.isHidden = false
+                                self.wrkSpace.text = space_path_name // space_path_name
+                                self.lblplndStats.text = count[0].planned_status + " " +  count[0].shift_name
+                                self.wrkSpaceNum.text = space_name
 
-                    if !count
-                    {//book
-                        self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
-                        self.setupUIBook()
-                    }
-                    else
-                    {
-                        self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
-                        self.setupUIOccupy()
-                    }
-                    }
+                                
+                   }
+                    if count.count > 0
+                       {
+                           self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
+                           self.setupUIOccupy()
+                       }
+                       else
+                       {//book
+                           
+                           self.instanceOfUser.writeAnyData(key: "bkStatus", value: "book")
+                           self.setupUIBook()
+                       }
+                }
                     }
 
                }
@@ -1455,29 +1497,30 @@ extension cvdDashbrdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     //https://www.9healthfair.org/blog/advice-from-a-doctor-coronavirus-dos-and-donts/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 0
+        {
             self.instanceOfUser.writeAnyData(key: "dos_safty", value: "dos")
            // print(self.instanceOfUser.readStringData(key: "covidDos"))
-            let vc = UIStoryboard(name: "webViewStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WebViewController") as! webViewController
-            vc.dosLink = self.instanceOfUser.readStringData(key: "covidDos")
+            let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.webviewController) as! webViewController
+                vc.dosLink = self.instanceOfUser.readStringData(key: "covidDos")
                    self.navigationController?.isNavigationBarHidden = true
                    self.navigationController?.pushViewController(vc, animated: true)
             
         }
         else if indexPath.row == 1 {
             self.instanceOfUser.writeAnyData(key: "dos_safty", value: "safty")
-            let vc = UIStoryboard(name: "webViewStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WebViewController") as! webViewController
-            vc.saftyLink = self.instanceOfUser.readStringData(key: "covidsafety")
+            let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.webviewController) as! webViewController
+                vc.saftyLink = self.instanceOfUser.readStringData(key: "covidsafety")
                    self.navigationController?.isNavigationBarHidden = true
                    self.navigationController?.pushViewController(vc, animated: true)
             }
             else if indexPath.row == 2 {//report incidnt
-                let vc = UIStoryboard(name: "addEqpmntStoryboard", bundle: nil).instantiateViewController(withIdentifier: "AssetRegistry") as! AssetRegistryViewController
+            let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.assetRegistryViewController) as! AssetRegistryViewController
                        self.navigationController?.isNavigationBarHidden = true
                        self.navigationController?.pushViewController(vc, animated: true)
                 }
                 else if indexPath.row == 3 {//report issu
-                    let vc = UIStoryboard(name: "rseTkyStoryboard", bundle: nil).instantiateViewController(withIdentifier: "rprtIssy") as! SelectLocationViewController
+                    let vc = Constants.Storyboard.categrySubcategry.instantiateViewController(withIdentifier: Constants.Ids.selectLocationviewController) as! SelectLocationViewController
                            self.navigationController?.isNavigationBarHidden = true
                            self.navigationController?.pushViewController(vc, animated: true)
                     }

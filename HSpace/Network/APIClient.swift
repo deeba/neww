@@ -569,42 +569,7 @@ request.httpMethod = "POST"
                                                       }
                                                          task1.resume()
         }
-    func getSpaceIdBooked_new(Tkn:String,compid: String,vndrId: String,spacId: String,shftId: String ,PlndIn: String,PlndOut: String,empId: String,completion: @escaping (Bool) -> Void) {
-    var request = URLRequest(url: URL(string: APIBuilder.SpaceIdBooked(compid: compid,vndrId: vndrId,spacId: spacId,shftId: shftId ,PlndIn: PlndIn,PlndOut: PlndOut,empId: empId))!,timeoutInterval: Double.infinity)
-    let string1 = "Bearer "
-    let string2 = Tkn
-    let combined2 = "\(string1) \(String(describing: string2))"
-    request.addValue(combined2, forHTTPHeaderField: "Authorization")
-    let str = ""
-    let postData = NSMutableData(data: str.data(using: String.Encoding.utf8)!)
-    //postData.append(varRole.data(using: String.Encoding.utf8)!)
-    request.httpBody = postData as Data
-    request.httpMethod = "POST"
-       let task1 = URLSession.shared.dataTask(with: request) { data, response, error in
-                  guard let data = data else {
-                    print(String(describing: error))
-                    return
-                  }
-                  do {
-                     // make sure this JSON is in the format we expect
-                  let jsonc = try JSON(data: data)
-                    if jsonc["data"][0].count > 0
-                    {
 
-                       completion(true)
-                       
-                   }
-    
-                     }
-
-                  catch let error as NSError {
-
-                    completion(false)
-                     print("Failed to load: \(error.localizedDescription)")
-                  }
-                  }
-                     task1.resume()
-    }
      func postRelsed(Tkn:String){
         let spcId = curntSchedulModll.space_id
         let team_id  = configurationModls.maintenance_team_id
@@ -654,6 +619,7 @@ request.httpMethod = "POST"
         "domain" : "[[\"user_id\",\"=\",\(self.instanceOfUser.readIntData(key: "UsrId"))]]",
         "fields" : "[\"roles\",\"vendor_id\"]"]
         AFWrapper.multipartRequest(APIBuilder.search(), params: param, headers: headers, success: { (result) in
+            
             if let data = (result as? NSDictionary)?["data"] as? NSArray {
                 let arrz = [( Int,String,Array<Any>)]()
                 for i in data {
@@ -662,8 +628,8 @@ request.httpMethod = "POST"
                         usrRlrModl.usrId = id
                         usrRlrModl.usrRol = roles
                         usrRlrModl.vndrId = vendor_id[0] as! Int
+                        self.instanceOfUser.writeAnyData(key: "vndrIds", value: usrRlrModl.vndrId)
                         usrRlrModl.vndrNam = vendor_id[1] as! String
-                        
                     }
                 }
                 completion([])
@@ -732,30 +698,27 @@ request.httpMethod = "POST"
                                                       }
                                                          task1.resume()
         }
-    func getUserInfo(Tkn:String) {
+    func getUserInfo(Tkn:String,completion: @escaping ([repoUser]) -> Void) {
     
                                    var request = URLRequest(url: URL(string: userInfo_URL)!,timeoutInterval: Double.infinity)
                                    let string1 = "Bearer "
-                                   let string2 = Tkn
+                                   let string2 = self.instanceOfUser.readStringData(key: "accessTokenz")
                                    let combined2 = "\(string1) \(String(describing: string2))"
                                   request.addValue(combined2, forHTTPHeaderField: "Authorization")
                                   request.httpMethod = "GET"
                                   let task1 = URLSession.shared.dataTask(with: request) { data, response, error in
+                                    print(data as Any)
                                     guard let data = data else {
                                       print(String(describing: error))
                                       return
                                     }
                                    do {
                                        // make sure this JSON is in the format we expect
-                                          let jsonc = try JSON(data: data)
+                                    let jsonc = try JSON(data: data)
+                                    var values = [repoUser]()
                                     //print(json["data"][0]["validation_status_count"].stringValue)
-                                           let title = jsonc["data"]
-                                     /*  In userinfo read following objects
-                                       employee_name
-                                       employee_id
-                                       sub is userid
-                                       company_id
-                                       company_name*/
+//let title = jsonc["data"]
+                                    values.append(repoUser( company_name: jsonc["company_name"].stringValue ,employee_name: jsonc["employee_name"].stringValue,username:jsonc["username"].stringValue, company_id:jsonc["company_id"].int!,employee_id: jsonc["employee_id"].int!, usrId: jsonc["sub"].int!))
                                        usrInfoModl.compId = jsonc["company_id"].int!
                                        usrInfoModl.compName = jsonc["company_name"].stringValue
                                        usrInfoModl.employee_id = jsonc["employee_id"].int!
@@ -763,9 +726,12 @@ request.httpMethod = "POST"
                                        usrInfoModl.usrId = jsonc["sub"].int!
                                        usrInfoModl.userName = jsonc["username"].stringValue
                                        self.instanceOfUser.writeAnyData(key: "UsrId", value: jsonc["sub"].int!)
+                                    print(values)
+                                     completion(values)
                                     }
                                     catch let error as NSError {
                                        print("Failed to load: \(error.localizedDescription)")
+                                        completion([])
                                    }
                                   }
                            task1.resume()
@@ -1287,20 +1253,7 @@ print("Failed to load: \(error.localizedDescription)")
              completion([])
          }
      }
-       func submtSymptomAnswers(activtyId:String,answr:String,completion: @escaping (Int?) -> Void) {
-           let typ = "boolean"
-           let headers = header(type: .formData, authorization: true)
-           let param = [ "values" : "{\"employee_id\":\(usrInfoModls.employee_id),\"vendor_id\":\(usrInfoModls.vendor_id),\"type\":\"\(typ)\",\"answer\":\"\(answr)\",\"check_list_id\":\(configurationModls.check_list_ids),\"mro_activity_id\":\(activtyId),\"shift_id\":\(curntSchedulModll.shift_id)}"]
-           AFWrapper.multipartRequest(APIBuilder.submtSymptomAnswerz(), params: param, headers: headers, success: { (result) in
-            //print(result as Any)
-               if let id = (result as? NSArray)?.firstObject as? Int {
-                   completion(id)
-               }
-           }) { (error) in
-               print(error.debugDescription)
-               completion(nil)
-           }
-       }
+
      func submtIncidnt(Tkn:String,subj:String,category:String,categoryId:Int,subcategoryId:Int,channel:String,issue_type:String ,tenant_id:Int,asset_id:String,maintenance_team_id:Int,at_done_mro:Bool,completion: @escaping (Int?) -> Void) {
         /* https://demo.helixsense.com/api/create?model=website.support.ticket&values={"subject":"test","type_category":"asset","category_id":55,"sub_category_id":352,"channel":"mobile_app","issue_type":"request","tenant_id":1450,"asset_id":"9104","maintenance_team_id":"547","at_done_mro":true}
   */
@@ -1547,98 +1500,7 @@ if varstts
           task1.resume()
 
           }
-       func submtIncidnt_new(Tkn:String,subj:String,category:String,categoryId:Int,subcategoryId:Int,channel:String,issue_type:String ,tenant_id:Int,asset_id:String,maintenance_team_id:Int,at_done_mro:Bool,completion: @escaping (Bool?) -> Void) {
-      let  stringRole2 = "&values="
-          let idy = curntSHift.space_id
-          let tmId = tenantModl.maintenance_team_id
-      let stringFields = """
-       {"subject":"
-       """
-       let stringFields1 = """
-        ","type_category":"
-        """
-        let stringFields2 = """
-         ","category_id":
-         """
-         let stringFields3 = """
-          ,"sub_category_id":
-          """
-          let stringFields4 = """
-           ,"channel":"
-           """
-        
 
-        let stringFields5 = """
-         ","issue_type":"
-         """
-         let stringFields6 = """
-          ","tenant_id":
-          """
-          let stringFields7 = """
-           ,"asset_id":"
-           """
-           let stringFields8 = """
-            ","maintenance_team_id":"
-            """
-            let stringFields9 = """
-             ","at_done_mro":
-             """
-        let closg1 = """
-         }
-         """
-      /* let stringFields1 = """
-           [{"space_id":\(curntSHift.space_id),"team_id":\(tenantModl.maintenance_team_id)}]
-           """
-    */
-       
-       let  ids1 = "&method=mro_order_create_for_shift"
-       let  stringRole5 = "&model=website.support.ticket"
-       //let    stringFields = "\(String(describing:stringRole5))\(String(describing:stringRole2))\(String(describing:stringFields1))\(String(describing:ids1))\(curntSHift.space_id)\(String(describing:offsetFields2))"
-          let    stringFieldz = "\(String(describing:stringRole5))\(String(describing:stringRole2))\(String(describing:stringFields))\(subj)\(String(describing:stringFields1))\(category)\(String(describing:stringFields2))\(categoryId)\(String(describing:stringFields3))\(subcategoryId)\(String(describing:stringFields4))\(channel)\(String(describing:stringFields5))\(issue_type)\(String(describing:stringFields6))\(tenant_id)\(String(describing:stringFields7))\(asset_id)\(String(describing:stringFields8))\(maintenance_team_id)\(String(describing:stringFields9))\(at_done_mro)\(closg1)"
-            let headers = header(type: .formData, authorization: true)
-           let param = (stringFieldz)
-                let url = NSURL(string: APIBuilder.createID()) //Remember to put ATS exception if the URL is not https
-                let request = NSMutableURLRequest(url: url! as URL)
-                      let string1 = "Bearer "
-
-                      let string2 = Tkn
-                      let combined2 = "\(string1) \(String(describing: string2))"
-
-                    request.addValue(combined2, forHTTPHeaderField: "Authorization")
-                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type") //Optional
-
-                request.httpMethod = "POST"
-                let session = URLSession(configuration:URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
-                let data = param.data(using: String.Encoding.utf8)
-                request.httpBody = data
-
-
-            let task1 = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-              guard let data = data else {
-                print(String(describing: error))
-                return
-              }
-             do {
-                let jsonStr = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                print(jsonStr as Any)
-                 let nwFlds = """
-                 "status": true
-                 """
-                 let varstts =  jsonStr?.contains("\(String(describing: nwFlds))") ?? false
-                 if varstts
-                     {
-                       completion(varstts)
-
-              }
-
-                 }
-                 
-             }
-
-                                                                           
-      task1.resume()
-
-      }
      func writeReleas(Tkn:String,completion: @escaping (Bool) -> Void) {
     let  stringRole2 = "&args="
         let idy = curntSHift.space_id

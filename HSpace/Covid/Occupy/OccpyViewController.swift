@@ -10,19 +10,6 @@ import UIKit
 
 class OccpyViewController: UIViewController {
     let instanceOfUser = readWrite()
-    /*
-    @IBAction func btnCncl() {
-         Loader.show()
-         APIClient.shared().getTokenz
-         {status in}
-         APIClient.shared().dashBrdApi(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz") )
-         sleep(2)
-         let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-         let mainTabBarController = storyboard.instantiateViewController(identifier: "tabBarStory")
-         mainTabBarController.modalPresentationStyle = .fullScreen
-         self.present(mainTabBarController, animated: true, completion: nil)
-    }
- */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -26,22 +26,6 @@ let instanceOfUser = readWrite()
     @IBOutlet weak var lblMnth: UILabel!
     @IBAction func btnConfirm(_ sender: Any) {
         self.instanceOfUser.writeAnyData(key: "bk_rprtSpac", value: "")
-
-       
-       // Loader.show()
-        /* APIClient.shared().getTokenz
-        {status in}
-        APIClient.shared().dashBrdApi(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz") )
-        sleep(2)
-        
-       LoaderSpin.shared.showLoader()
-        let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "tabBarStory")
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.pushViewController(mainTabBarController, animated: true)
-        */
-        
-        
         LoaderSpin.shared.showLoader(self)
         let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
            let mainTabBarController = storyboard.instantiateViewController(identifier: "tabBarStory")
@@ -78,7 +62,7 @@ let instanceOfUser = readWrite()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
          APIClient_redesign.shared().getTokenz { status in
            if status {
-            APIClient.shared().getSpaceIdBooked_new(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz"),compid: String(usrInfoModls.company_id),vndrId: String(usrInfoModls.vendor_id),spacId: String(self.spacebkdId),shftId: String(shftId) ,PlndIn: strt,PlndOut: endd,empId: String(usrInfoModls.employee_id))
+            APIClient_redesign.shared().postSpaceIdBooked_new(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz"),compid: String(usrInfoModls.company_id),vndrId: String(usrInfoModls.vendor_id),spacId: String(self.spacebkdId),shftId: String(shftId) ,PlndIn: strt,PlndOut: endd,empId: String(usrInfoModls.employee_id))
             {_ in
                           
                                 LoaderSpin.shared.hideLoader()

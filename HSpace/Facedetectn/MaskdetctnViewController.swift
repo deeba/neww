@@ -73,10 +73,7 @@ extension MaskdetctnViewController: UIImagePickerControllerDelegate, UINavigatio
               
           }
         sleep(1)
-        let viewController:
-               UIViewController = UIStoryboard(
-                   name: "OccpyStoryboard", bundle: nil
-               ).instantiateViewController(withIdentifier: "symptomsLstStory") as! symptomsViewController
+        let viewController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.symptomsLstViewController) as! symptomsViewController
                // .instantiatViewControllerWithIdentifier() returns AnyObject!
                // this must be downcast to utilize it
 

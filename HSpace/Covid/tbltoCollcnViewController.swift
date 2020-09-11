@@ -28,28 +28,14 @@ class tbltoCollcnViewController: UIViewController {
              }
         else
         {
-
           self.instanceOfUser.writeAnyData(key: "chsnSpace", value: self.titleLbl.text as Any)
-              let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-              let mainTabBarController = storyboard.instantiateViewController(identifier: "cofrmScreenaftrQR") as! cofrmScreenaftrQRViewController
+            let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.cofrmScreenaftrQR) as! cofrmScreenaftrQRViewController
               self.navigationController?.isNavigationBarHidden = false
                     mainTabBarController.spacebkdId = self.idy
             self.nxtBtn.isEnabled = false
              let appDelegate = UIApplication.shared.delegate as! AppDelegate
                           //show window
             appDelegate.window?.rootViewController = mainTabBarController
-            /*
-            Loader.show()
-            APIClient.shared().getTokenz
-            {status in}
-            APIClient.shared().dashBrdApi(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz") )
-            sleep(2)
-            let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-            let mainTabBarController = storyboard.instantiateViewController(identifier: "tabBarStory")
-            mainTabBarController.modalPresentationStyle = .fullScreen
-            self.present(mainTabBarController, animated: true, completion: nil)
-            //self.performSegue(withIdentifier: "rprtInciseg", sender: nil)
-            */
         }
 
     }

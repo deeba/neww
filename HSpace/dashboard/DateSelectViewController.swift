@@ -11,6 +11,8 @@ import DropDown
 
 class DateSelectViewController: UIViewController {
     let interNt = Internt()
+    
+    var shifList:[repoShft] = []
     var tstDte = ""
     let instanceOfUser = readWrite()
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -41,14 +43,14 @@ class DateSelectViewController: UIViewController {
     self.tstDte = formatter.string(from: datePicker.date)
     self.instanceOfUser.writeAnyData(key: "chsnShftdte", value: self.tstDte )
 
-    let vc = UIStoryboard(name: "addEqpmntStoryboard", bundle: nil).instantiateViewController(withIdentifier: "ItemSelection") as! ItemSelectionViewController
-
+    let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.ItemSelectionViewController) as! ItemSelectionViewController
     LoaderSpin.shared.showLoader(self)
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
     APIClient_redesign.shared().getTokenz { status in
     LoaderSpin.shared.hideLoader()
     if status {
     APIClient_redesign.shared().getShftListAvailable(){ count in
+        self.shifList = count
     vc.items = availableshftListModl.ttlDis
     vc.type = .Types
     vc.selectionTitle = "Select a shift "

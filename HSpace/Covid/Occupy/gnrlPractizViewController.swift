@@ -13,9 +13,7 @@ class gnrlPractizViewController: UIViewController {
     var symptms: Bool!
 let instanceOfUser = readWrite()
     @IBAction func btnSend(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "OccpyStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "confrmOccpy") as! confrmOccpyViewController
+       let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.confirmOccpy) as! confrmOccpyViewController
         mainTabBarController.symptms = symptms
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.pushViewController(mainTabBarController, animated: true)

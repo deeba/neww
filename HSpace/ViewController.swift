@@ -1298,7 +1298,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                                                                           if status {
                                                                               APIClient_redesign.shared().getCurrentSchedule()
                                                                             { status in
-                                                                                if status
+                                                                                if status.count > 0
                                                                                 {
                                                                                     self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
                                                                                 }
@@ -1344,7 +1344,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                                              DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                       APIClient.shared().getTokenz
                                                           {status in}
-                                                      APIClient.shared().getUserInfo(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz") )
+                                                      APIClient.shared().getUserInfo(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz")){count in
+                                                 print(count)
+                                                        }
                                                       sleep(1)
                                             }
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -1451,12 +1453,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                                     credentlsModl.pwd = Pwd
                                     self.instanceOfUser.writeAnyData(key: "accessTokenz", value: myJson["access_token"]!!)
                                     self.instanceOfUser.writeAnyData(key: "refreshTokenz", value: myJson["refresh_token"]!!)
+                                    /*
                                   DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                   APIClient_redesign.shared().getToken { status in
                                                                     if status {
                                                                         APIClient_redesign.shared().getCurrentSchedule()
                                                                       { status in
-                                                                          if status
+                                                                          if status.count > 0
                                                                           {
                                                                               self.instanceOfUser.writeAnyData(key: "bkStatus", value: "nobook")
                                                                           }
@@ -1469,38 +1472,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                                                                       }
                                                                     }
                                       }
-                                   
-                                        
-                                               
+                                    */
 
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                   APIClient.shared().getTokenz
                                                       {status in}
                                                   self.DownldCategory(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz"))
                                         }
-                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                  APIClient.shared().getTokenz
-                                                      {status in}
-                                                  APIClient.shared().getUserInfo(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz") )
-                                                  sleep(1)
-                                        }
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                  APIClient.shared().getTokenz
-                                                  {status in}
-                                                  APIClient.shared().getusrRoleAlom(){ (data) in
-                                                  }
-                                                  sleep(1)
-                                        }
-                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                    APIClient.shared().getToken { status in
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                  APIClient_redesign.shared().getTokenz { status in
                                                     if status {
-                                                        APIClient.shared().getTenantdtls(vndrId:String(usrRlrModl.vndrId)){ count in
+                                                  APIClient_redesign.shared().getUserRepo()
+                                                    { count in
+                                                        APIClient.shared().getusrRoleAlom(){ (data) in
+                                                            APIClient.shared().getTenantdtls(vndrId:String(self.instanceOfUser.readStringData(key: "vndrIds"))){ count in
+                                                            }
                                                         }
                                                     }
                                                     }
-                                             }
-
-                                    
+                                                    }
+                                        }
                                     DispatchQueue.main.sync {
                                        LoaderSpin.shared.showLoader(self)
                                         self.lblUserErr.text = ""

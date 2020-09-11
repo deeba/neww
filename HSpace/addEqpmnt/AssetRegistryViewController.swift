@@ -19,8 +19,7 @@ class AssetRegistryViewController: UIViewController {
         }
     }
     @IBAction func nextBt(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "addEqpmntStoryboard", bundle: nil)
-       let vc = storyboard.instantiateViewController(identifier: "rprtIssu") as! rprtIncidntViewController
+        let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.rprtincidntViewController) as! rprtIncidntViewController
        vc.lcn = selectedLocationLabel.text
        vc.lcnPth = instanceOfUser.readStringData(key: "selLocn")
        vc.lcnidz = instanceOfUser.readStringData(key: "selLocnId")

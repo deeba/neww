@@ -15,10 +15,8 @@ enum HeaderTypez {
     case formUrlencoded
     case formData
 }
-
 class APIClient_redesign {
     var token : String?
-
    let interNt = Internt()
     let instanceOfUser = readWrite()
     private static var sharedNetworkManager: APIClient_redesign = {
@@ -56,21 +54,13 @@ class APIClient_redesign {
         }
     }
     func getSpaceListAvailable(space_id: String? = nil,from_date: String? = nil,to_date: String? = nil,type: String? = nil,completion: @escaping ([SpaceDetails]) -> Void) {
-        
       var values = [SpaceDetails]()
       let headers = header(authorization: true)
-        /*
-         Desk:
-         v3/space/list/availability?space_id= 53&shift_id=2&from_date=2020- 08-19 11:00:00&to_date=2020-08- 19 19:00:00&type=2
-         space_id
-         */
       Alamofire.request(APIBuilder.SpaceListAvailable(space_id: space_id,from_date: from_date,to_date:to_date ,type:type ), method: .get, headers: headers)
       .responseJSON { response in
           if response.data != nil {
           do {
               let jsonc = try JSON(data: response.data!)
-             // let title = jsonc["data"][0]["name"].stringValue
-             //let title = jsonc["data"][0]["parent_category_id"][1].stringValue
              let title = jsonc["data"]
              if (title.count > 0)
                     {
@@ -84,7 +74,6 @@ class APIClient_redesign {
                                     countt: String(title[i]["count"].intValue), statts: title[i]["status"].stringValue, employeeid: title[i]["employee_id"].stringValue, employeeName: title[i]["employee_name"].stringValue, availablestatus: String(title[i]["available_status"].boolValue),
                                     haveChilds: title[i]["is_parent"].boolValue))
                   }
-                        print(values)
             }
 
             completion(values)
@@ -96,7 +85,7 @@ class APIClient_redesign {
           }
       }
               }
-    func getPrescreenDon(Tkn:String,completion: @escaping (Bool) -> Void) {
+    func putPrescreenDon(Tkn:String,completion: @escaping (Bool) -> Void) {
         let idy =  curntSchedulModll.id
         let  ids1 = "&ids=["
         //  let  stringRole5 = "&model=hr.attendance"
@@ -153,7 +142,7 @@ class APIClient_redesign {
             task1.resume()
 
             }
-    func getOccpied(Tkn:String,completion: @escaping (Bool) -> Void) {
+    func putOccpied(Tkn:String,completion: @escaping (Bool) -> Void) {
         let idy =  curntSchedulModll.space_id
         let  ids1 = "&ids=["
         //  let  stringRole5 = "&model=hr.attendance"
@@ -210,7 +199,33 @@ class APIClient_redesign {
             task1.resume()
 
             }
-    func getShftListAvailable(completion: @escaping (Bool) -> Void) {
+        func getUserRepo(completion: @escaping ([repoUser]) -> Void) {
+        var values = [repoUser]()
+        let headers = header(authorization: true)
+            Alamofire.request(userInfo_URL, method: .get, headers: headers)
+            .responseJSON { response in
+                if response.data != nil {
+                do {
+                    let jsonc = try JSON(data: response.data!)
+                              values.append(repoUser( company_name: jsonc["company_name"].stringValue ,employee_name: jsonc["employee_name"].stringValue,username:jsonc["username"].stringValue, company_id:jsonc["company_id"].int!,employee_id: jsonc["employee_id"].int!, usrId: jsonc["sub"].int!))
+                              usrInfoModl.compId = jsonc["company_id"].int!
+                              usrInfoModl.compName = jsonc["company_name"].stringValue
+                              usrInfoModl.employee_id = jsonc["employee_id"].int!
+                              usrInfoModl.empName = jsonc["employee_name"].stringValue
+                              usrInfoModl.usrId = jsonc["sub"].int!
+                              usrInfoModl.userName = jsonc["username"].stringValue
+                              self.instanceOfUser.writeAnyData(key: "UsrId", value: jsonc["sub"].int!)
+                  completion(values)
+                     }
+                  catch let error as NSError {
+                      completion([])
+                     print("Failed to load: \(error.localizedDescription)")
+                  }
+                }
+            }
+        }
+    func getShftListAvailable(completion: @escaping ([repoShft]) -> Void) {
+        var values = [repoShft]()
         availableshftListModl.duration.removeAll()
         availableshftListModl.id.removeAll()
         availableshftListModl.name.removeAll()
@@ -241,6 +256,8 @@ class APIClient_redesign {
              if (title.count > 0)
                     {
                     for i in 0..<title.count {
+
+                        values.append(repoShft(name: title[i]["name"].stringValue ,planned_in: title[i]["planned_in"].stringValue,planned_out:title[i]["planned_out"].stringValue,ttl:"Shift " + title[i]["name"].stringValue + "(" + title[i]["planned_in"].stringValue + "-" + title[i]["planned_out"].stringValue + ")",id: title[i]["id"].intValue, start_time: title[i]["start_time"].doubleValue,duration: title[i]["duration"].doubleValue ))
                         availableshftListModl.duration.append(title[i]["duration"].doubleValue)
                         availableshftListModl.id.append(title[i]["id"].intValue)
                         availableshftListModl.name.append(title[i]["name"].stringValue)
@@ -259,17 +276,17 @@ class APIClient_redesign {
                       //if
                         
             }
-            completion(true)
-               }
-            catch let error as NSError {
-                completion(false)
-               print("Failed to load: \(error.localizedDescription)")
+           completion(values)
+                         }
+                      catch let error as NSError {
+                          completion([])
+                         print("Failed to load: \(error.localizedDescription)")
+                      }
+                    }
+                }
             }
-          }
-      }
-              }
     
-    func getSymptomsLst(chkLst_id: String? = nil,completion: @escaping ([symptmsChecklist]) -> Void) {
+    func postSymptomsLst(chkLst_id: String? = nil,completion: @escaping ([symptmsChecklist]) -> Void) {
        let headers = header(authorization: true)
         AFWrapper.getRequest(APIBuilder.getSymptoms(chkLstid:chkLst_id!), headers: headers, success: { (result) in
        // LoaderSpin.shared.showLoader()
@@ -344,7 +361,9 @@ class APIClient_redesign {
                                 }
                             }
                             
-    func getCurrentSchedule(completion: @escaping (Bool) -> Void){
+    func getCurrentSchedule(completion: @escaping ([repoCrntSchedul]) -> Void) {
+        var values = [repoCrntSchedul]()
+        /*
         curntSchedulModll.access_status = false
         curntSchedulModll.actual_in = false
         curntSchedulModll.actual_out = false
@@ -363,6 +382,7 @@ class APIClient_redesign {
         curntSchedulModll.space_status = ""
         curntSchedulModll.user_defined = false
         curntSchedulModll.working_hours = 0.0
+ */
     var statuz = false
     let headers = header(authorization: true)
     // LoaderSpin.shared.showLoader()
@@ -376,8 +396,12 @@ class APIClient_redesign {
            let title = jsonc["data"]
            if (title.count > 0)
            {
+            values.append(repoCrntSchedul(access_status: title[0]["access_status"].boolValue ,actual_in: title[0]["actual_in"].boolValue,actual_out:title[0]["actual_out"].boolValue,prescreen_status: title[0]["prescreen_status"].boolValue ,user_defined: title[0]["user_defined"].boolValue, employee_id: title[0]["employee_id"].intValue,id: title[0]["id"].intValue ,
+            shift_id: title[0]["shift_id"].intValue ,space_id: title[0]["space_id"].intValue,planned_in:title[0]["planned_in"].stringValue,planned_out: title[0]["planned_out"].stringValue ,planned_status: title[0]["planned_status"].stringValue, shift_name: title[0]["shift_name"].stringValue,space_name: title[0]["space_name"].stringValue
+            ,   space_number: title[0]["space_number"].stringValue ,space_path_name: title[0]["space_path_name"].stringValue,space_status:title[0]["space_status"].stringValue,working_hours: title[0]["working_hours"].doubleValue
+            ))
             statuz = true
-            curntSchedulModll.access_status = title[0]["access_status"].boolValue
+           /* curntSchedulModll.access_status = title[0]["access_status"].boolValue
             curntSchedulModll.actual_in = title[0]["actual_in"].boolValue
             curntSchedulModll.actual_out = title[0]["actual_out"].boolValue
             curntSchedulModll.employee_id = title[0]["employee_id"].intValue
@@ -395,23 +419,25 @@ class APIClient_redesign {
             curntSchedulModll.space_status = title[0]["space_status"].stringValue
             curntSchedulModll.user_defined = title[0]["user_defined"].boolValue
             curntSchedulModll.working_hours = title[0]["working_hours"].doubleValue
+ */
             }
             else
            {
             statuz = false
             }
-            completion(statuz)
+            completion(values)
          // LoaderSpin.shared.hideLoader()
              }
           catch let error as NSError {
-            completion(false)
+            completion([])
              print("Failed to load: \(error.localizedDescription)")
           }
         }
     }
 
         }
-    func getConfiguration(completion: @escaping (Bool) -> Void) {
+    func getConfiguration(completion: @escaping ([repoConfgrn]) -> Void) {
+        var values = [repoConfgrn]()
         configurationModls.access_type = ""
        configurationModls.enable_access = false
        configurationModls.skip_occupy = false
@@ -488,6 +514,24 @@ class APIClient_redesign {
              let title = jsonc["data"]
              if (title.count > 0)
                     {
+                        var offic_rm_sp_id = 0
+                        var offic_rm_sp_nam = ""
+                        if jsonc["data"]["Building"]["office_room_space_id"].isEmpty == false
+                        {
+                            offic_rm_sp_id = jsonc["data"]["Building"]["office_room_space_id"]["id"].int!
+                            offic_rm_sp_nam = jsonc["data"]["Building"]["office_room_space_id"]["name"].stringValue
+                        }
+                        values.append(repoConfgrn(
+                            enable_access: title[0]["enable_access"].boolValue, skip_occupy:jsonc["data"]["Access"]["skip_occupy"].boolValue,attendance_with_face_detection:jsonc["data"]["Attendance"]["attendance_with_face_detection"].boolValue,
+                            require_attendance:jsonc["data"]["Attendance"]["require_attendance"].boolValue,allow_onspot_space_booking:jsonc["data"]["Booking"]["allow_onspot_space_booking"].boolValue,book_from_outlook:jsonc["data"]["Booking"]["book_from_outlook"].boolValue,create_work_schedule:jsonc["data"]["Booking"]["create_work_schedule"].boolValue,show_occupant:jsonc["data"]["Booking"]["show_occupant"].boolValue,allow_after_non_compliance:jsonc["data"]["Covid"]["allow_after_non_compliance"].boolValue,enable_report_covid_incident:jsonc["data"]["Covid"]["enable_report_covid_incident"].boolValue,enable_screening:jsonc["data"]["Covid"]["enable_screening"].boolValue,detect_mask:jsonc["data"]["Occupy"]["detect_mask"].boolValue,face_detection_mandatory:jsonc["data"]["Occupy"]["face_detection_mandatory"].boolValue,mask_mandatory:jsonc["data"]["Occupy"]["mask_mandatory"].boolValue,prerelease_required:jsonc["data"]["Prerelease"]["prerelease_required"].boolValue,enable_prescreen:jsonc["data"]["Prescreen"]["enable_prescreen"].boolValue,prescreen_is_manadatory:jsonc["data"]["Prescreen"]["prescreen_is_manadatory"].boolValue,require_checklist:jsonc["data"]["Prescreen"]["require_checklist"].boolValue,auto_release:jsonc["data"]["Release"]["auto_release"].boolValue,generate_mor_after_release:jsonc["data"]["Release"]["generate_mor_after_release"].boolValue
+                            ,onspot_booking_grace_period:jsonc["data"]["Booking"]["onspot_booking_grace_period"].int!,work_schedule_grace_period:jsonc["data"]["Booking"]["work_schedule_grace_period"].int!,building_id:jsonc["data"]["Building"]["building_ids"][0]["id"].int!,conference_room_space_id:jsonc["data"]["Building"]["conference_room_space_id"]["id"].int!,conference_room_sub_type_id:jsonc["data"]["Building"]["conference_room_sub_type_id"]["id"].int!,office_room_space_id:offic_rm_sp_id,office_room_sub_type_id:jsonc["data"]["Building"]["office_room_sub_type_id"]["id"].int!,workstation_space_id:jsonc["data"]["Building"]["workstation_space_id"]["id"].int!,workstation_sub_type_id:jsonc["data"]["Building"]["workstation_sub_type_id"]["id"].int!,enable_landing_page_id:jsonc["data"]["Covid"]["enable_landing_page_id"]["id"].int!,enable_other_resources_id:jsonc["data"]["Covid"]["enable_other_resources_id"]["id"].int!,enable_workspace_instruction_id:jsonc["data"]["Covid"]["enable_workspace_instruction_id"]["id"].int!,help_line_id:jsonc["data"]["Covid"]["help_line_id"]["id"].int!,maintenance_team_id:jsonc["data"]["Covid"]["maintenance_team_id"]["id"].int!,safety_resources_id:jsonc["data"]["Covid"]["safety_resources_id"]["id"].int!,sub_category_id:jsonc["data"]["Covid"]["sub_category_id"]["id"].int!,ticket_category_id:jsonc["data"]["Covid"]["ticket_category_id"]["id"].int!,check_list_ids:jsonc["data"]["Prescreen"]["check_list_ids"][0]["id"].int!,auto_release_grace_period:jsonc["data"]["Release"]["auto_release_grace_period"].int!
+                            ,
+                             access_type:jsonc["data"]["Access"]["access_type"].stringValue,attendance_source:jsonc["data"]["Attendance"]["attendance_source"].stringValue,building_name:jsonc["data"]["Building"]["building_ids"][0]["name"].stringValue,
+                             conference_room_space_name:jsonc["data"]["Building"]["conference_room_space_id"]["name"].stringValue,conference_room_sub_type_name:jsonc["data"]["Building"]["conference_room_sub_type_id"]["name"].stringValue,office_room_space_name:offic_rm_sp_nam,
+                             office_room_sub_type_name:jsonc["data"]["Building"]["office_room_sub_type_id"]["name"].stringValue,workstation_space_name:jsonc["data"]["Building"]["workstation_space_id"]["name"].stringValue,workstation_sub_type_name:jsonc["data"]["Building"]["workstation_sub_type_id"]["name"].stringValue,enable_landing_page_name:jsonc["data"]["Covid"]["enable_landing_page_id"]["name"].stringValue,enable_other_resources_name:jsonc["data"]["Covid"]["enable_other_resources_id"]["name"].stringValue,enable_other_resources_url:jsonc["data"]["Covid"]["enable_other_resources_id"]["url"].stringValue,enable_workspace_instruction_name:jsonc["data"]["Covid"]["enable_workspace_instruction_id"]["name"].stringValue,help_line_mobile:jsonc["data"]["Covid"]["help_line_id"]["mobile"].stringValue,help_line_name:jsonc["data"]["Covid"]["help_line_id"]["name"].stringValue,maintenance_team_name:jsonc["data"]["Covid"]["maintenance_team_id"]["name"].stringValue,safety_resources_name:jsonc["data"]["Covid"]["safety_resources_id"]["name"].stringValue,safety_resources_url:jsonc["data"]["Covid"]["safety_resources_id"]["url"].stringValue,sub_category_name:jsonc["data"]["Covid"]["sub_category_id"]["name"].stringValue,ticket_category_name:jsonc["data"]["Covid"]["ticket_category_id"]["name"].stringValue,title:jsonc["data"]["Covid"]["title"].stringValue,check_list_name:jsonc["data"]["Prescreen"]["check_list_ids"][0]["name"].stringValue,
+                             allowed_occupancy_per:jsonc["data"]["Covid"]["allowed_occupancy_per"].doubleValue,prerelease_period:jsonc["data"]["prerelease"]["prerelease_period"].doubleValue,prescreen_period:jsonc["data"]["Prescreen"]["prescreen_period"].doubleValue
+                        
+                        ))
                         configurationModls.access_type = jsonc["data"]["Access"]["access_type"].stringValue
                         configurationModls.enable_access = jsonc["data"]["Access"]["enable_access"].boolValue
                         configurationModls.skip_occupy = jsonc["data"]["Access"]["skip_occupy"].boolValue
@@ -557,11 +601,11 @@ class APIClient_redesign {
                         configurationModls.generate_mor_after_release = jsonc["data"]["Release"]["generate_mor_after_release"].boolValue
                         
                       }
-            completion(true)
+            completion(values)
          //   LoaderSpin.shared.hideLoader()
                }
             catch let error as NSError {
-                completion(false)
+                completion([])
                print("Failed to load: \(error.localizedDescription)")
             }
           }
@@ -618,6 +662,7 @@ class APIClient_redesign {
          sleep(1)
      }
      func getToken(completion: @escaping (Bool) -> Void) {
+        print(credentlsModl.usrId)
         let param: [String : Any] = [
             "grant_type" : "password",
             "client_id" : "clientkey",
@@ -637,6 +682,148 @@ class APIClient_redesign {
             completion(false)
         }
     }
+    func postSpaceIdBooked_new(Tkn:String,compid: String,vndrId: String,spacId: String,shftId: String ,PlndIn: String,PlndOut: String,empId: String,completion: @escaping (Bool) -> Void) {
+    var request = URLRequest(url: URL(string: APIBuilder.SpaceIdBooked(compid: compid,vndrId: vndrId,spacId: spacId,shftId: shftId ,PlndIn: PlndIn,PlndOut: PlndOut,empId: empId))!,timeoutInterval: Double.infinity)
+    let string1 = "Bearer "
+    let string2 = Tkn
+    let combined2 = "\(string1) \(String(describing: string2))"
+    request.addValue(combined2, forHTTPHeaderField: "Authorization")
+    let str = ""
+    let postData = NSMutableData(data: str.data(using: String.Encoding.utf8)!)
+    //postData.append(varRole.data(using: String.Encoding.utf8)!)
+    request.httpBody = postData as Data
+    request.httpMethod = "POST"
+       let task1 = URLSession.shared.dataTask(with: request) { data, response, error in
+                  guard let data = data else {
+                    print(String(describing: error))
+                    return
+                  }
+                  do {
+                     // make sure this JSON is in the format we expect
+                  let jsonc = try JSON(data: data)
+                    if jsonc["data"][0].count > 0
+                    {
+
+                       completion(true)
+                       
+                   }
+    
+                     }
+
+                  catch let error as NSError {
+
+                    completion(false)
+                     print("Failed to load: \(error.localizedDescription)")
+                  }
+                  }
+                     task1.resume()
+    }
+    func postSymptomAnswers(activtyId:String,answr:String,completion: @escaping (Int?) -> Void) {
+        let typ = "boolean"
+        let headers = header(type: .formData, authorization: true)
+        let param = [ "values" : "{\"employee_id\":\(usrInfoModls.employee_id),\"vendor_id\":\(usrInfoModls.vendor_id),\"type\":\"\(typ)\",\"answer\":\"\(answr)\",\"check_list_id\":\(configurationModls.check_list_ids),\"mro_activity_id\":\(activtyId),\"shift_id\":\(curntSchedulModll.shift_id)}"]
+        AFWrapper.multipartRequest(APIBuilder.submtSymptomAnswerz(), params: param, headers: headers, success: { (result) in
+         //print(result as Any)
+            if let id = (result as? NSArray)?.firstObject as? Int {
+                completion(id)
+            }
+        }) { (error) in
+            print(error.debugDescription)
+            completion(nil)
+        }
+    }
+       func postIncidnt_new(Tkn:String,subj:String,category:String,categoryId:Int,subcategoryId:Int,channel:String,issue_type:String ,tenant_id:Int,asset_id:String,maintenance_team_id:Int,at_done_mro:Bool,completion: @escaping (Bool?) -> Void) {
+      let  stringRole2 = "&values="
+          let idy = curntSHift.space_id
+          let tmId = tenantModl.maintenance_team_id
+      let stringFields = """
+       {"subject":"
+       """
+       let stringFields1 = """
+        ","type_category":"
+        """
+        let stringFields2 = """
+         ","category_id":
+         """
+         let stringFields3 = """
+          ,"sub_category_id":
+          """
+          let stringFields4 = """
+           ,"channel":"
+           """
+        
+
+        let stringFields5 = """
+         ","issue_type":"
+         """
+         let stringFields6 = """
+          ","tenant_id":
+          """
+          let stringFields7 = """
+           ,"asset_id":"
+           """
+           let stringFields8 = """
+            ","maintenance_team_id":"
+            """
+            let stringFields9 = """
+             ","at_done_mro":
+             """
+        let closg1 = """
+         }
+         """
+      /* let stringFields1 = """
+           [{"space_id":\(curntSHift.space_id),"team_id":\(tenantModl.maintenance_team_id)}]
+           """
+    */
+       
+       let  ids1 = "&method=mro_order_create_for_shift"
+       let  stringRole5 = "&model=website.support.ticket"
+       //let    stringFields = "\(String(describing:stringRole5))\(String(describing:stringRole2))\(String(describing:stringFields1))\(String(describing:ids1))\(curntSHift.space_id)\(String(describing:offsetFields2))"
+          let    stringFieldz = "\(String(describing:stringRole5))\(String(describing:stringRole2))\(String(describing:stringFields))\(subj)\(String(describing:stringFields1))\(category)\(String(describing:stringFields2))\(categoryId)\(String(describing:stringFields3))\(subcategoryId)\(String(describing:stringFields4))\(channel)\(String(describing:stringFields5))\(issue_type)\(String(describing:stringFields6))\(tenant_id)\(String(describing:stringFields7))\(asset_id)\(String(describing:stringFields8))\(maintenance_team_id)\(String(describing:stringFields9))\(at_done_mro)\(closg1)"
+            let headers = header(type: .formData, authorization: true)
+           let param = (stringFieldz)
+                let url = NSURL(string: APIBuilder.createID()) //Remember to put ATS exception if the URL is not https
+                let request = NSMutableURLRequest(url: url! as URL)
+                      let string1 = "Bearer "
+
+                      let string2 = Tkn
+                      let combined2 = "\(string1) \(String(describing: string2))"
+
+                    request.addValue(combined2, forHTTPHeaderField: "Authorization")
+                request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type") //Optional
+
+                request.httpMethod = "POST"
+                let session = URLSession(configuration:URLSessionConfiguration.default, delegate: nil, delegateQueue: nil)
+                let data = param.data(using: String.Encoding.utf8)
+                request.httpBody = data
+
+
+            let task1 = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+              guard let data = data else {
+                print(String(describing: error))
+                return
+              }
+             do {
+                let jsonStr = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+                print(jsonStr as Any)
+                 let nwFlds = """
+                 "status": true
+                 """
+                 let varstts =  jsonStr?.contains("\(String(describing: nwFlds))") ?? false
+                 if varstts
+                     {
+                       completion(varstts)
+
+              }
+
+                 }
+                 
+             }
+
+                                                                           
+      task1.resume()
+
+      }
    func getAccessCheck(siteid: String? = nil,shftid: String? = nil,empid: String? = nil,completion: @escaping (Bool) -> Void) {
       let headers = header(authorization: true)
         Alamofire.request(APIBuilder.AccessCheck(siteId: siteid,shftId: shftid,empId: empid), method: .get, headers: headers)
@@ -659,7 +846,8 @@ class APIClient_redesign {
       }
               }
     
-    func getUserinformation(completion: @escaping (Bool) -> Void) {
+    func getUserinformation(completion: @escaping ([repousrInfo]) -> Void) {
+        var values = [repousrInfo]()
       let headers = header(authorization: true)
      //  LoaderSpin.shared.showLoader()
       Alamofire.request(APIBuilder.Userinformation(), method: .get, headers: headers)
@@ -667,12 +855,13 @@ class APIClient_redesign {
           if response.data != nil {
           do {
               let jsonc = try JSON(data: response.data!)
-             // let title = jsonc["data"][0]["name"].stringValue
-             //let title = jsonc["data"][0]["parent_category_id"][1].stringValue
              let title = jsonc["data"]
              if (title.count > 0)
                     {
-                        
+                        values.append(repousrInfo(company_id: title["company_id"]["id"].int! ,employee_id: title["employee"]["id"].int!,user_id:title["user_id"].int!,vendor_id: title["vendor"]["id"].int! ,company_name: title["company_id"]["name"].stringValue,company_tz: title["company_tz"].stringValue ,
+                                                  email: title["email"].stringValue ,employee_name: title["employee"]["name"].stringValue,locale:title["locale"].stringValue,name: title["name"].stringValue ,phone_number: title["phone_number"].stringValue, updated_at: title["updated_at"].stringValue,user_role: title["user_role"].stringValue
+                            ,   username: title["username"].stringValue,vendor_name: title["vendor"]["name"].stringValue,website:title["website"].stringValue,zoneinfo: title["zoneinfo"].stringValue
+                        ))
                               usrInfoModls.company_id = title["company_id"]["id"].int!
                               usrInfoModls.company_name = title["company_id"]["name"].stringValue
                               usrInfoModls.company_tz = title["company_tz"].stringValue
@@ -691,10 +880,10 @@ class APIClient_redesign {
                               usrInfoModls.website = title["website"].stringValue
                               usrInfoModls.zoneinfo = title["zoneinfo"].stringValue
                       }
-            completion(true)
+            completion(values)
                }
             catch let error as NSError {
-                completion(false)
+                completion([])
                print("Failed to load: \(error.localizedDescription)")
             }
           }

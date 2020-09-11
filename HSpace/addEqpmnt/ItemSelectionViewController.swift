@@ -114,8 +114,7 @@ extension ItemSelectionViewController: UITableViewDataSource, UITableViewDelegat
             */
             
             self.instanceOfUser.writeAnyData(key: "chsnShfttim", value: self.selectedItem?.components(separatedBy: "(")[1] as Any)
-                let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-                let mainTabBarController = storyboard.instantiateViewController(identifier: "dshBrdbkSpace") as! dshBrdbkSpace
+            let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.bkSpaceViewController) as! dshBrdbkSpace
                 mainTabBarController.modalPresentationStyle = .fullScreen
             mainTabBarController.chosenShift = (self.selectedItem as Any as! String)
             let doubley = availableshftListModl.duration[find(value: shft[0], in: availableshftListModl.name)!]

@@ -42,7 +42,7 @@ class rprtIncidntViewController: UIViewController , UITextFieldDelegate, UITextV
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             APIClient_redesign.shared().getTokenz
             {status in
-            APIClient.shared().submtIncidnt_new(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz"), subj:self.lbldescrpn.text!,category:typcatgry,categoryId:tenantModl.ticket_category_id,subcategoryId:tenantModl.sub_category_id,channel:chnl,issue_type:issutyp ,tenant_id:tenantModl.id,asset_id:self.lcnidz,maintenance_team_id:tenantModl.maintenance_team_id,at_done_mro:true) { id in
+            APIClient_redesign.shared().postIncidnt_new(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz"), subj:self.lbldescrpn.text!,category:typcatgry,categoryId:tenantModl.ticket_category_id,subcategoryId:tenantModl.sub_category_id,channel:chnl,issue_type:issutyp ,tenant_id:tenantModl.id,asset_id:self.lcnidz,maintenance_team_id:tenantModl.maintenance_team_id,at_done_mro:true) { id in
                 }
 
         }

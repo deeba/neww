@@ -81,8 +81,7 @@ class dshBrdbkSpace: UIViewController {
 
     let interNt = Internt()
     @IBAction func btnConfrnce(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "tbltoCollcn") as! tbltoCollcnViewController
+        let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.tbltoCollcn) as! tbltoCollcnViewController
         /*
          Desk, read workstation_space_id
          If Office, read office_room_space_id
@@ -94,8 +93,7 @@ class dshBrdbkSpace: UIViewController {
         self.present(mainTabBarController, animated: true, completion: nil)
     }
     @IBAction func btnOffic(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "tbltoCollcn") as! tbltoCollcnViewController
+        let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.tbltoCollcn) as! tbltoCollcnViewController
         /*
          Desk, read workstation_space_id
          If Office, read office_room_space_id
@@ -107,8 +105,7 @@ class dshBrdbkSpace: UIViewController {
         self.present(mainTabBarController, animated: true, completion: nil)
     }
     @IBAction func btndsk(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-        let mainTabBarController = storyboard.instantiateViewController(identifier: "tbltoCollcn") as! tbltoCollcnViewController
+       let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.tbltoCollcn) as! tbltoCollcnViewController
         /*
          Desk, read workstation_space_id
          If Office, read office_room_space_id
@@ -139,8 +136,8 @@ class dshBrdbkSpace: UIViewController {
 
                 self.performSegue(withIdentifier: "showSpac", sender: sender)
  */
-                let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-                    let mainTabBarController = storyboard.instantiateViewController(identifier: "tbltoCollcn") as! tbltoCollcnViewController
+               
+               let mainTabBarController = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.tbltoCollcn) as! tbltoCollcnViewController
                 self.present(mainTabBarController, animated: true, completion: nil)
                 }
     }
@@ -230,9 +227,7 @@ class dshBrdbkSpace: UIViewController {
         setTrailingView(in: tf, image: UIImage(systemName: "chevron.down"), tintColor: .gray)
         //ItemSelection
         tf.addGestureRecognizer(GestureRecognizerWithClosure {
-
-            let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: "ItemSelection") as! ItemSelectionViewController
+            let vc = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.ItemSelectionViewController) as! ItemSelectionViewController
             vc.items = dataSource
             vc.type = screenType
             vc.selectionTitle = "Select \(tf.placeholder ?? "")"
@@ -334,8 +329,8 @@ class dshBrdbkSpace: UIViewController {
             } else {
                 imageView.tintColor = .black
                 tf.addGestureRecognizer(GestureRecognizerWithClosure {
-                    let storyboard = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
-                    let dateVC = storyboard.instantiateViewController(identifier: "DateSelect") as! DateSelectViewController
+
+                    let dateVC = Constants.Storyboard.dshBrd.instantiateViewController(withIdentifier: Constants.Ids.dateSelectViewController) as! DateSelectViewController
                     switch tf {
                     case self.bkDte:
                         dateVC.minimumDate = Date()

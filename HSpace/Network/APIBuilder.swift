@@ -96,8 +96,6 @@ class APIBuilder {
             data += "%22]"
         }
         data += self.VALIDATIONCOUNT2
-        
-        print(data)
         return data
     }
     static func AccessCheck(siteId: String?,shftId: String?,empId: String?) -> String {
@@ -146,7 +144,6 @@ class APIBuilder {
         return self.BASE_URL + self.PrescreenURL
     }
     static func OccpiedURL() -> String {
-        print(self.BASE_URL + self.occpidURL)
         return self.BASE_URL + self.occpidURL
     }
     static func writemskData() -> String {

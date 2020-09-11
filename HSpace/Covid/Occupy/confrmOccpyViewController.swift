@@ -18,7 +18,7 @@ class confrmOccpyViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 APIClient_redesign.shared().getTokenz
                    {status in
-               APIClient_redesign.shared().getPrescreenDon(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz")) { cnt in
+               APIClient_redesign.shared().putPrescreenDon(Tkn:self.instanceOfUser.readStringData(key: "accessTokenz")) { cnt in
                LoaderSpin.shared.hideLoader()
                  if cnt {
                   }

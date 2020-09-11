@@ -53,12 +53,26 @@ extension Constants {
     struct Storyboard {
         static let main = UIStoryboard(name: "Main", bundle: nil)
         static let sideMenu = UIStoryboard(name: "SideMenu", bundle: nil)
+        static let dshBrd = UIStoryboard(name: "cvdDashbrdStoryboard", bundle: nil)
+        static let categrySubcategry = UIStoryboard(name: "rseTkyStoryboard", bundle: nil)
     }
     
     struct Ids {
+        static let  cofrmScreenaftrQR = "cofrmScreenaftrQR"
+        static let  tbltoCollcn = "tbltoCollcn"
+        static let  ItemSelectionViewController = "ItemSelection"
+        static let  bkSpaceViewController = "dshBrdbkSpace"
+        static let  gnrlpractizViewController =  "gnrlpractizViewController"
+        static let  confirmOccpy =  "confrmOccpy"
+        static let symptomsLstViewController = "symptomsLstStory"
+        static let rprtincidntViewController = "rprtIncidntViewController"
+        static let webviewController = "WebViewController"
         static let viewController = "ViewController"
+        static let selectLocationviewController = "rprtIssy"
+        static let occpyRedesign = "OccpyRedesign"
         static let sideMenuViewController = "SideMenuViewController"
-        static let assetRegistryViewController = "AssetRegistryViewController"
+        static let scanqrOccpySpace = "scanQROccpySpace"
+        static let assetRegistryViewController = "AssetRegistry"
         static let addEquipmentViewController = "addEqpmntStoryboard"
         static let imagePickerViewController = "ImagePickerViewController"
         static let dateSelectViewController = "DateSelectViewController"
